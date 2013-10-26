@@ -12,11 +12,9 @@
     <string name="last_trip">Última viagem</string>
     
     <!-- http://stackoverflow.com/questions/10411699/concatenate-multiple-strings-in-xml -->
-    <string name="z2">Z2</string>
-    <string name="z3">Z3</string>
-    <string name="z4">Z4</string>
-    <string name="z5">Z5</string>
-    <string name="z6">Z6</string>
+    <string name="t1">T1</string>
+    <string name="t2">T2</string>
+    <string name="t3">T3</string>
     
     
 

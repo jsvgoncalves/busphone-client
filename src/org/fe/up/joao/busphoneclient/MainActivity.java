@@ -2,9 +2,8 @@ package org.fe.up.joao.busphoneclient;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.text.Html;
+import android.content.Intent;
 import android.view.Menu;
-import android.widget.TextView;
 
 /**
  * This activity includes has the login screen.
@@ -15,14 +14,24 @@ import android.widget.TextView;
  */
 public class MainActivity extends Activity {
 
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 		
-		String z2Num = "<br><small>x3</small>";
-		String ticket_label = getString(R.string.z2) + z2Num;
-		((TextView)findViewById(R.id.z2button)).setText(Html.fromHtml(ticket_label));
+		if(hasLogin()){
+			Intent intent = new Intent(this, HomeActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clears the Main Activity
+			startActivity(intent);
+			
+		} else {
+			setContentView(R.layout.activity_main);
+		}
+	}
+
+	private boolean hasLogin() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	@Override
