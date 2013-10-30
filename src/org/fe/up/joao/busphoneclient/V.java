@@ -1,5 +1,7 @@
 package org.fe.up.joao.busphoneclient;
 
+import java.util.ArrayList;
+
 /**
  * Contains any values that are common
  * to multiple activities such as user
@@ -33,6 +35,11 @@ public class V {
 	 * Database user ID
 	 */
 	private static int userID = 1; //FIXME: temporary debug
+	
+	public static ArrayList<Ticket> ticketsT1 = new ArrayList<Ticket>();
+	public static ArrayList<Ticket> ticketsT2 = new ArrayList<Ticket>();
+	public static ArrayList<Ticket> ticketsT3 = new ArrayList<Ticket>();
+	public static ArrayList<Ticket> ticketsHistory = new ArrayList<Ticket>();
 	
 	public static String getName() {
 		return name;
@@ -80,6 +87,16 @@ public class V {
 	
 	public static void setID(int id) {
 		V.userID = id;
+	}
+
+
+	public static void resetTickets() {
+		ticketsT1.clear();
+		ticketsT2.clear();
+		ticketsT3.clear();
+		ticketsT1 = new ArrayList<Ticket>();
+		ticketsT2 = new ArrayList<Ticket>();
+		ticketsT3 = new ArrayList<Ticket>();
 	}
 	
 }

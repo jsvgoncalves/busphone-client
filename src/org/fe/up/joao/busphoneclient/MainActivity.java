@@ -21,8 +21,9 @@ public class MainActivity extends Activity {
 		
 		if(hasLogin()){
 			Intent intent = new Intent(this, HomeActivity.class);
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Clears the Main Activity
+			intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME); // Clears the Main Activity
 			startActivity(intent);
+			finish();
 			
 		} else {
 			setContentView(R.layout.activity_main);

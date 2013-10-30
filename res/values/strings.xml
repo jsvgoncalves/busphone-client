@@ -16,6 +16,8 @@
     <string name="t2">T2</string>
     <string name="t3">T3</string>
     
-    
+    <string name="greeting">Olá %s. Escolha um título:</string>
+    <string name="qrcode_thumb">QRCode thumbnail</string>
+    <string name="how_to_use">Mantenha o ecrã a 10cm do leitor para validar.</string>
 
 </resources>
