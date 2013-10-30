@@ -26,7 +26,7 @@ import org.apache.http.message.BasicNameValuePair;
  */
 public class ComHelper{
 	
-	public static final String JSON_EXTENSION = ".json";
+//	public static final String JSON_EXTENSION = ".json";
 	public static String serverURL = "http://busphone-service.herokuapp.com/";
 	
 

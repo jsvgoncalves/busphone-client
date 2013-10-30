@@ -6,6 +6,8 @@ import org.fe.up.joao.busphoneclient.helper.ComHelper;
 import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.model.Ticket;
+import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,8 +48,8 @@ public class HomeActivity extends Activity {
 		// your Activity's XML layout file
 		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
 	
-		if (!V.ticketsHistory.isEmpty()) {
-			String qrData = V.ticketsHistory.get(0).uuid;
+		if (!User.ticketsHistory.isEmpty()) {
+			String qrData = User.ticketsHistory.get(0).uuid;
 			int qrCodeDimention = 500;
 			System.out.println("Ticket history is empty.");
 			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
@@ -90,9 +92,9 @@ public class HomeActivity extends Activity {
 		Button buttonT2 = (Button) findViewById(R.id.t2button);
 		Button buttonT3 = (Button) findViewById(R.id.t3button);
 		
-		buttonT1.setText(getString(R.string.t1) + "\nx" + V.ticketsT1.size());
-		buttonT2.setText(getString(R.string.t2) + "\nx" + V.ticketsT2.size());
-		buttonT3.setText(getString(R.string.t3) + "\nx" + V.ticketsT3.size());
+		buttonT1.setText(getString(R.string.t1) + "\nx" + User.ticketsT1.size());
+		buttonT2.setText(getString(R.string.t2) + "\nx" + User.ticketsT2.size());
+		buttonT3.setText(getString(R.string.t3) + "\nx" + User.ticketsT3.size());
 	}
 
 	
@@ -105,7 +107,7 @@ public class HomeActivity extends Activity {
 		protected void onPreExecute(){}
 		
 		public void getUser() {
-			String url = ComHelper.serverURL + "users/" + V.getID() + ComHelper.JSON_EXTENSION;
+			String url = ComHelper.serverURL + "users/" + User.getID();
 			this.execute("get", url);
 		}
 
@@ -122,8 +124,9 @@ public class HomeActivity extends Activity {
 			// Put the user's name in place.
 			String name = JSONHelper.getValue(json, "user", "name");
 			HomeActivity.this.setUserName(name);
-			V.resetTickets();			
+			User.resetTickets();			
 			ArrayList<String> tickets = JSONHelper.getArray(json, "user", "tickets");
+			
 			for (String ticketStr : tickets) {
 				json = JSONHelper.string2JSON(ticketStr);
 				try {
@@ -134,13 +137,13 @@ public class HomeActivity extends Activity {
 							json.getString("updated_at"));
 					switch (t.ticket_type) {
 					case 1:
-						V.ticketsT1.add(t);
+						User.ticketsT1.add(t);
 						break;
 					case 2:
-						V.ticketsT2.add(t);
+						User.ticketsT2.add(t);
 						break;
 					case 3:
-						V.ticketsT3.add(t);
+						User.ticketsT3.add(t);
 						break;
 					default:
 						throw new JSONException("Invalid ticket type while retrieving tickets! (type=" + t.ticket_type + ")");
