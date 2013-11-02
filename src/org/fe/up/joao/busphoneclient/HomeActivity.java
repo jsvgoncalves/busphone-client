@@ -15,9 +15,12 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +44,14 @@ public class HomeActivity extends Activity {
 		
 		getUser();
 		updateQRCode();
+	}
+	
+	public void buttonClicked(View view) {
+		final Button bt = (Button) view;
+//		Log.v("mylog", bt.getText().toString());
+		Intent intent = new Intent(this, UseTicketActivity.class);
+		intent.putExtra("ticket_type", bt.getText().toString());
+		startActivity(intent);
 	}
 	
 	protected void updateQRCode(){

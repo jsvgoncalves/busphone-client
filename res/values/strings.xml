@@ -19,5 +19,8 @@
     <string name="greeting">Olá %s. Escolha um título:</string>
     <string name="qrcode_thumb">QRCode thumbnail</string>
     <string name="how_to_use">Mantenha o ecrã a 10cm do leitor para validar.</string>
+    
+    <string name="title">Título</string>
+    <string name="available">Disponíveis</string>
 
 </resources>

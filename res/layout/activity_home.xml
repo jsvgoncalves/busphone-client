@@ -40,21 +40,25 @@
                     style="android:buttonBarStyle"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
-                    android:text="@string/t1" />
+                    android:text="@string/t1"
+                    android:onClick="buttonClicked" />
 
                 <Button
                     android:id="@+id/t2button"
                     style="android:buttonBarStyle"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
-                    android:text="@string/t2" />
+                    android:text="@string/t2"
+                    android:onClick="buttonClicked" />
 
                 <Button
                     android:id="@+id/t3button"
                     style="android:buttonBarStyle"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
-                    android:text="@string/t3" />
+                    android:text="@string/t3"
+                    android:onClick="buttonClicked" />
+                
             </LinearLayout>
 
             <Button
