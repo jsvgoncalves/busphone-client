@@ -147,8 +147,8 @@ public class BusPhoneClient extends Application {
 		editor.putString("pw", pw);
 		editor.putString("token", token);
 		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format));
-//		editor.putString("expirationDate", dFormat.format(expirationDate).toString());
-		editor.putString("expirationDate", "1998-1-1 01:01:01");
+		editor.putString("expirationDate", dFormat.format(expirationDate).toString());
+//		editor.putString("expirationDate", "1998-1-1 01:01:01");
 		
 		// Commit the edits!
 		editor.commit();
