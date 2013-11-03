@@ -123,8 +123,8 @@ public class ComHelper{
 //		getApplicationContext()
 		Log.v("mylog", "doing get");
 		try {
-			URL url = new URL(params[1]);
-			Log.v("mylog", params[1]);
+			URL url = new URL(params[0]);
+			Log.v("mylog", params[0]);
 			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 			InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 			String r = readStream(in);

@@ -22,5 +22,9 @@
     
     <string name="title">Título</string>
     <string name="available">Disponíveis</string>
+        
+    
+    <!-- For toasts -->
+    <string name="loginexception">Por favor tente novamente.</string>
 
 </resources>

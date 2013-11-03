@@ -38,14 +38,21 @@ import android.widget.TextView;
  */
 public class HomeActivity extends Activity {
 	
+	BusPhoneClient bus;
+
+
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 //		Log.v("mylog", "network: " + ComHelper.isOnline(this));
 		super.onCreate(savedInstanceState);
+		bus = (BusPhoneClient) getApplicationContext();
 		setContentView(R.layout.activity_home);
 		
-		getUser();
-		updateQRCode();
+		setUserName();
+		updateTickets();
+//		updateQRCode();
 		
 	}
 	
@@ -89,16 +96,10 @@ public class HomeActivity extends Activity {
 		}
 	}
 	
-	/**
-	 * Get user data.
-	 */
-	public void getUser(){
-		(new GetUserTask()).getUser();
-	}
 	
-	public void setUserName(String name) {
+	public void setUserName() {
 		TextView userName = (TextView) findViewById(R.id.using_ticket);
-		userName.setText(String.format( getString(R.string.greeting), name));
+		userName.setText(String.format( getString(R.string.greeting), bus.getName()));
 	}
 	
 	public void updateTickets() {
@@ -112,92 +113,7 @@ public class HomeActivity extends Activity {
 	}
 
 	
-	/**
-	 * Retrieves the user profile
-	 * and its tickets
-	 */
-	private class GetUserTask extends AsyncTask<String, String, String>{
-		@Override
-		protected void onPreExecute(){}
-		
-		public void getUser() {
-			String url = ComHelper.serverURL + "users/" + User.getID();
-			this.execute("get", url);
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-		    return ComHelper.httpGet(params);
-		}
-		
-		@Override
-		protected void onPostExecute (String result){
-			System.out.println(result);
-			JSONObject json = JSONHelper.string2JSON(result);
-			
-			// Put the user's name in place.
-			String name = JSONHelper.getValue(json, "user", "name");
-			HomeActivity.this.setUserName(name);
-			User.resetTickets();			
-			ArrayList<String> tickets = JSONHelper.getArray(json, "user", "tickets");
-			
-			for (String ticketStr : tickets) {
-				json = JSONHelper.string2JSON(ticketStr);
-				try {
-					Ticket t = new Ticket(json.getString("id"),
-							json.getString("ticket_type"),
-							json.getString("uuid"),
-							json.getString("created_at"),
-							json.getString("updated_at"));
-					switch (t.ticket_type) {
-					case 1:
-						User.ticketsT1.add(t);
-						break;
-					case 2:
-						User.ticketsT2.add(t);
-						break;
-					case 3:
-						User.ticketsT3.add(t);
-						break;
-					default:
-						throw new JSONException("Invalid ticket type while retrieving tickets! (type=" + t.ticket_type + ")");
-					}
-					
-					HomeActivity.this.updateTickets();
-				} catch (JSONException e) {
-					System.err.println(e.toString());
-					System.err.println("Invalid JSON while retrieving tickets!");
-				}
-			}
-		}
-	}
 	
-//	/**
-//	 * Retrieves the user ticket data
-//	 */
-//	private class GetTicketsTask extends AsyncTask<String, String, String>{
-//		
-//		public void getTickets(){
-//			String url = ComHelper.serverURL + "users/" + V.getID() + ComHelper.JSON_EXTENSION;
-//			this.execute("get", url);
-//		}
-//		
-//		@Override
-//		protected String doInBackground(String... params) {
-//		    return ComHelper.httpGet(params);
-//		}
-//		
-//		@Override
-//		protected void onPostExecute (String result){
-//			System.out.println(result);
-//			JSONObject json = JSONHelper.string2JSON(result);
-//			
-//			// Put the user's name in place.
-//			String name = JSONHelper.getPath(json, "user", "name");
-//			TextView userName = (TextView) HomeActivity.this.findViewById(R.id.userName);
-//			userName.setText(String.format( getString(R.string.greeting), name));
-//		}
-//	}
 	
 	@Override
 	public void onStop() {

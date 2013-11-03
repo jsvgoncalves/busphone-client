@@ -3,12 +3,11 @@ package org.fe.up.joao.busphoneclient;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 import org.fe.up.joao.busphoneclient.helper.ComHelper;
-import org.fe.up.joao.busphoneclient.helper.ComTasks;
+import org.fe.up.joao.busphoneclient.helper.ComService;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.Ticket;
@@ -16,13 +15,11 @@ import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.widget.Toast;
 
 /**
@@ -34,24 +31,20 @@ import android.widget.Toast;
  */
 public class MainActivity extends Activity {
 
-	private String PREFS_NAME = "login";
 	BusPhoneClient bus;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		bus = (BusPhoneClient) getApplicationContext();
-		bus.saveSharedPrefs();
+		
 		// Check for proper sharePreferences 
 		if(!bus.hasLoadedPrefs()) {
 			// show login screen
 			setContentView(R.layout.activity_main);
-			
 		} // If the user has saved prefs then check for expirationDate 
 		else if(hasLoginExpired()){
 			// If it has, then try to login
-//			ComTasks.doLogin();
-//			Log.v("mylog", "doing login");
 			doLogin();
 		} else {
 			// If everything is cool, then just move on to the other activity
@@ -59,8 +52,112 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Starts a new "service" (not android service) and provides the callback
+	 */
 	private void doLogin() {
-		(new LoginTask()).doIt();
+		new ComService(
+				"login/" + bus.getEmail() + "/" + bus.getPw(), 
+				MainActivity.this, 
+				"loginDone");
+	}
+	
+	public void loginDone(String result) {
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		
+		if(status.equals("0")) {
+			String token = JSONHelper.getValue(json, "token");
+			String user_id = JSONHelper.getValue(json, "user_id");
+			String expirationDate_string = JSONHelper.getValue(json, "expirationDate");
+			Date expirationDate = new Date();
+			try {
+				expirationDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(expirationDate_string);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+			}
+			
+			bus.setToken(token);
+			bus.setUser_id(user_id);
+			bus.setExpirationDate(expirationDate);
+
+			// Everything is fine so load the user info
+			new ComService(
+					"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
+					MainActivity.this, 
+					"getUserInfoDone");
+		} else {
+			Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	public void getUserInfoDone(String result) {
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		if(status.equals("0")) {
+			String name = JSONHelper.getValue(json, "user", "name");
+			bus.setName(name);
+			
+			// Parse the tickets
+			parseTickets(json);
+			
+			Toast.makeText(getApplicationContext(), "Bem vindo " + bus.getName(), Toast.LENGTH_LONG).show();
+			startHome();
+		} else {
+			Toast.makeText(getApplicationContext(), "Qualquer coisa correu mal :(", Toast.LENGTH_LONG).show();
+		}
+	}
+
+	private void parseTickets(JSONObject json) {
+		ArrayList<String> t1 = JSONHelper.getArray(json, "user", "tickets", "t1");
+		ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
+		ArrayList<String> t3 = JSONHelper.getArray(json, "user", "tickets", "t3");
+		
+		for (String ticketStr : t1) {
+			json = JSONHelper.string2JSON(ticketStr);
+			try {
+				Ticket t = new Ticket(json.getString("id"),
+						json.getString("ticket_type"),
+						json.getString("uuid"),
+						json.getString("created_at"),
+						json.getString("updated_at"));
+				User.ticketsT1.add(t);
+			} catch (JSONException e) {
+				System.err.println(e.toString());
+				System.err.println("Invalid JSON while retrieving tickets!");
+			}
+		}
+		
+		for (String ticketStr : t2) {
+			json = JSONHelper.string2JSON(ticketStr);
+			try {
+				Ticket t = new Ticket(json.getString("id"),
+						json.getString("ticket_type"),
+						json.getString("uuid"),
+						json.getString("created_at"),
+						json.getString("updated_at"));
+				User.ticketsT2.add(t);
+			} catch (JSONException e) {
+				System.err.println(e.toString());
+				System.err.println("Invalid JSON while retrieving tickets!");
+			}
+		}
+		
+		for (String ticketStr : t3) {
+			json = JSONHelper.string2JSON(ticketStr);
+			try {
+				Ticket t = new Ticket(json.getString("id"),
+						json.getString("ticket_type"),
+						json.getString("uuid"),
+						json.getString("created_at"),
+						json.getString("updated_at"));
+				User.ticketsT3.add(t);
+			} catch (JSONException e) {
+				System.err.println(e.toString());
+				System.err.println("Invalid JSON while retrieving tickets!");
+			}
+		}
 		
 	}
 
@@ -94,71 +191,10 @@ public class MainActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		
+		// Should we always save no matter what? or save only expiration and token?
 //		if(!bus.hasLoadedPrefs()) {
 			bus.saveSharedPrefs();
 //		}
 	}
 
-	/**
-	 * Retrieves the user profile
-	 * and its tickets
-	 */
-	private class LoginTask extends AsyncTask<String, String, String>{
-		@Override
-		protected void onPreExecute(){}
-		
-		public void doIt() {
-			String url = ComHelper.serverURL + "login/" + bus.getEmail() + "/" + bus.getPw();
-			this.execute("get", url);
-		}
-
-		@Override
-		protected String doInBackground(String... params) {
-		    return ComHelper.httpGet(params);
-		}
-		
-		@Override
-		protected void onPostExecute (String result){
-			System.out.println(result);
-			Log.v("mylog", "result " + result);
-			JSONObject json = JSONHelper.string2JSON(result);
-//			
-//			// Put the user's name in place.
-//			String name = JSONHelper.getValue(json, "user", "name");
-////			MainActivity.this.setUserName(name);
-//			User.resetTickets();			
-//			ArrayList<String> tickets = JSONHelper.getArray(json, "user", "tickets");
-//			
-//			for (String ticketStr : tickets) {
-//				json = JSONHelper.string2JSON(ticketStr);
-//				try {
-//					Ticket t = new Ticket(json.getString("id"),
-//							json.getString("ticket_type"),
-//							json.getString("uuid"),
-//							json.getString("created_at"),
-//							json.getString("updated_at"));
-//					switch (t.ticket_type) {
-//					case 1:
-//						User.ticketsT1.add(t);
-//						break;
-//					case 2:
-//						User.ticketsT2.add(t);
-//						break;
-//					case 3:
-//						User.ticketsT3.add(t);
-//						break;
-//					default:
-//						throw new JSONException("Invalid ticket type while retrieving tickets! (type=" + t.ticket_type + ")");
-//					}
-//					
-////					HomeActivity.this.updateTickets();
-//				} catch (JSONException e) {
-//					System.err.println(e.toString());
-//					System.err.println("Invalid JSON while retrieving tickets!");
-//				}
-//			}
-			MainActivity.this.startHome();
-		}
-	}
 }

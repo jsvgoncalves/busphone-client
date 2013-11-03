@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.fe.up.joao.busphoneclient.R;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,6 +17,8 @@ import android.util.Log;
 public class BusPhoneClient extends Application {
 	private static BusPhoneClient instance;
 	private static boolean hasLogin = false;
+	
+	private String user_id;
 	private String token;
 	private static String name;
 	private String email;
@@ -50,6 +54,14 @@ public class BusPhoneClient extends Application {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 	public static boolean hasLogin() {
@@ -110,7 +122,8 @@ public class BusPhoneClient extends Application {
 				token.equals("notset") || date.equals("1999-12-12 00:00:00") ) {
 				throw new ParseException("Parse exception", 0);
 			}
-			Date sharedDate = new SimpleDateFormat("yyyy-M-d H:m:s", Locale.ENGLISH).parse(date);
+			Date sharedDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(date);
+			
 			setEmail(email);
 			setPw(pw);
 			setExpirationDate(sharedDate); 
@@ -133,9 +146,9 @@ public class BusPhoneClient extends Application {
 		editor.putString("email", email);
 		editor.putString("pw", pw);
 		editor.putString("token", token);
-		SimpleDateFormat dFormat = new SimpleDateFormat("yyyy-M-d H:m:s");
-		editor.putString("expirationDate", dFormat.format(expirationDate).toString());
-//		editor.putString("expirationDate", "1998-1-1 01:01:01");
+		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format));
+//		editor.putString("expirationDate", dFormat.format(expirationDate).toString());
+		editor.putString("expirationDate", "1998-1-1 01:01:01");
 		
 		// Commit the edits!
 		editor.commit();
