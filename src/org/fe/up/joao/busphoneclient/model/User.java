@@ -34,7 +34,7 @@ public class User {
 	/**
 	 * Database user ID
 	 */
-	private static int userID = 1; //FIXME: temporary debug
+	private static int userID = 2; //FIXME: temporary debug
 	
 	public static ArrayList<Ticket> ticketsT1 = new ArrayList<Ticket>();
 	public static ArrayList<Ticket> ticketsT2 = new ArrayList<Ticket>();

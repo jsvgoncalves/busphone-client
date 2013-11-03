@@ -6,6 +6,7 @@ import org.fe.up.joao.busphoneclient.helper.ComHelper;
 import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONException;
@@ -39,11 +40,13 @@ public class HomeActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+//		Log.v("mylog", "network: " + ComHelper.isOnline(this));
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
 		
 		getUser();
 		updateQRCode();
+		
 	}
 	
 	public void buttonClicked(View view) {
@@ -195,4 +198,10 @@ public class HomeActivity extends Activity {
 //			userName.setText(String.format( getString(R.string.greeting), name));
 //		}
 //	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		Log.v("mylog", "stopping home");
+	}
 }
