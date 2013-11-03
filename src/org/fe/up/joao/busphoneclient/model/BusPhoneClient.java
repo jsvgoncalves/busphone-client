@@ -20,10 +20,12 @@ public class BusPhoneClient extends Application {
 	
 	private String user_id;
 	private String token;
-	private static String name;
+	private String name;
 	private String email;
 	private String pw;
 	private Date expirationDate;
+	
+	private boolean loggedOut;
 	
 	private String PREFS_NAME = "login";
 	private boolean loadedPrefs = false;
@@ -146,12 +148,20 @@ public class BusPhoneClient extends Application {
 		editor.putString("email", email);
 		editor.putString("pw", pw);
 		editor.putString("token", token);
-		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format));
+		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format), Locale.getDefault());
 		editor.putString("expirationDate", dFormat.format(expirationDate).toString());
 //		editor.putString("expirationDate", "1998-1-1 01:01:01");
 		
 		// Commit the edits!
 		editor.commit();
+	}
+	
+	public void setLoggedOut(boolean loggedOut) {
+		this.loggedOut = loggedOut;  
+	}
+
+	public boolean isLoggedOut() {
+		return loggedOut;
 	}
 
 }

@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
 		bus = (BusPhoneClient) getApplicationContext();
 		
 		// Check for proper sharePreferences 
-		if(!bus.hasLoadedPrefs()) {
+		if(!bus.hasLoadedPrefs() || bus.isLoggedOut()) {
 			// show login screen
 			setContentView(R.layout.activity_main);
 		} // If the user has saved prefs then check for expirationDate 
@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
 			} catch (ParseException e) {
 				e.printStackTrace();
 				Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+				findViewById(R.id.button_login).setEnabled(true);
 			}
 			
 			bus.setToken(token);
@@ -108,6 +109,7 @@ public class MainActivity extends Activity {
 					"getUserInfoDone");
 		} else {
 			Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+			findViewById(R.id.button_login).setEnabled(true);
 		}
 	}
 	
@@ -206,7 +208,7 @@ public class MainActivity extends Activity {
 	 * Called after the user leaves the Home screen.
 	 * If the logout button was pressed, RESULT_CANCELED is returned
 	 * and the app must allow the user to re-log. Otherwise,
-	 * just close the app as expected.
+	 * just leave the app.
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
