@@ -20,6 +20,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 /**
@@ -49,6 +51,20 @@ public class MainActivity extends Activity {
 		} else {
 			// If everything is cool, then just move on to the other activity
 			startHome();
+		}
+	}
+	
+	/**
+	 * Login button action handler
+	 */
+	public void loginAction(View v){
+		String email = ((EditText) findViewById(R.id.form_email)).getText().toString();
+		String pw = ((EditText) findViewById(R.id.form_pw)).getText().toString();
+		
+		if (email != "" && pw != "") {
+			bus.setEmail(email);
+			bus.setPw(pw);
+			doLogin();
 		}
 	}
 

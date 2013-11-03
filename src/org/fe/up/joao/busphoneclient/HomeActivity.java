@@ -1,24 +1,15 @@
 package org.fe.up.joao.busphoneclient;
 
-import java.util.ArrayList;
-
-import org.fe.up.joao.busphoneclient.helper.ComHelper;
 import org.fe.up.joao.busphoneclient.helper.Contents;
-import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
-import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
