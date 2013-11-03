@@ -58,6 +58,7 @@ public class MainActivity extends Activity {
 	 * Login button action handler
 	 */
 	public void loginAction(View v){
+		v.setEnabled(false);
 		String email = ((EditText) findViewById(R.id.form_email)).getText().toString();
 		String pw = ((EditText) findViewById(R.id.form_pw)).getText().toString();
 		
@@ -65,6 +66,8 @@ public class MainActivity extends Activity {
 			bus.setEmail(email);
 			bus.setPw(pw);
 			doLogin();
+		} else {
+			v.setEnabled(false);
 		}
 	}
 
@@ -183,8 +186,8 @@ public class MainActivity extends Activity {
 	private void startHome() {
 		Intent intent = new Intent(this, HomeActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME); // Clears the Main Activity
-		startActivity(intent);
-		finish();
+		startActivityForResult(intent, 1); // Request Code identifies the activity I'm launching, so, Home = 1
+		
 	}
 	
 	/**
@@ -197,6 +200,24 @@ public class MainActivity extends Activity {
 			return false;
 		} 
 		return true;
+	}
+	
+	/**
+	 * Called after the user leaves the Home screen.
+	 * If the logout button was pressed, RESULT_CANCELED is returned
+	 * and the app must allow the user to re-log. Otherwise,
+	 * just close the app as expected.
+	 */
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_CANCELED) {
+			// The user logged out.
+			setContentView(R.layout.activity_main);
+		} else if (resultCode == RESULT_OK) {
+			// The user left the app
+			finish();
+		}
 	}
 
 	@Override

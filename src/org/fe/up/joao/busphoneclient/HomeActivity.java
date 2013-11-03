@@ -6,12 +6,15 @@ import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.User;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
+import android.app.ActionBar;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -31,20 +34,36 @@ public class HomeActivity extends Activity {
 	
 	BusPhoneClient bus;
 
-
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 //		Log.v("mylog", "network: " + ComHelper.isOnline(this));
 		super.onCreate(savedInstanceState);
+		setResult(RESULT_OK); // ->RESULT_OK means it's not a logout. THe user just left the app.
 		bus = (BusPhoneClient) getApplicationContext();
 		setContentView(R.layout.activity_home);
 		
 		setUserName();
 		updateTickets();
-//		updateQRCode();
+//		updateQRCode();	
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		boolean su = super.onCreateOptionsMenu(menu);
+		menu.add("Logout");
 		
+		return true && su;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		String choice = item.getTitle().toString();
+		if (choice == "Logout") {
+			logout();
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	public void buttonClicked(View view) {
@@ -103,8 +122,10 @@ public class HomeActivity extends Activity {
 		buttonT3.setText(getString(R.string.t3) + "\nx" + User.ticketsT3.size());
 	}
 
-	
-	
+	public void logout(){
+		setResult(RESULT_CANCELED); // The user logged out
+		this.finish();
+	}
 	
 	@Override
 	public void onStop() {

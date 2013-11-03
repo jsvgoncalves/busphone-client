@@ -36,5 +36,6 @@
     <string name="form_cccod">Código Validação</string>
     <string name="form_email">E-mail</string>
     <string name="login">Entrar</string>
+    <string name="register">Nova Conta</string>
 
 </resources>
