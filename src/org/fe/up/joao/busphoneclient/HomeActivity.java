@@ -60,7 +60,7 @@ public class HomeActivity extends Activity {
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.logout:
-//	            logout();
+	            logout();
 	        	Log.v("mylog", "logging out");
 	            return true;
 	        default:
@@ -68,6 +68,10 @@ public class HomeActivity extends Activity {
 	    }
 	}
 	
+	/**
+	 * Handler for ticket buttons
+	 * @param view
+	 */
 	public void buttonClicked(View view) {
 		final Button bt = (Button) view;
 //		Log.v("mylog", bt.getText().toString());
@@ -125,8 +129,12 @@ public class HomeActivity extends Activity {
 	}
 
 	public void logout(){
-		setResult(RESULT_CANCELED); // The user logged out
-		this.finish();
+		bus.setLoggedOut(true);
+		bus.saveSharedPrefs();
+		Intent intent = new Intent(this, MainActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+		startActivity(intent);
+		finish();
 	}
 	
 	@Override

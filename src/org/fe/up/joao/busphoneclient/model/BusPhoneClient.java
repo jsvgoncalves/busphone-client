@@ -110,23 +110,27 @@ public class BusPhoneClient extends Application {
 	private boolean checkSharedPrefs() {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		
+		String name = settings.getString("name", "notset");
 		String email = settings.getString("email", "notset");
 		String pw = settings.getString("pw", "notset");
 		String token = settings.getString("token", "notset");
 		String date = settings.getString("expirationDate", "1999-12-12 00:00:00");
+		boolean loggedOut = settings.getBoolean("loggedOut", true);
 //		date = "1999-12-12 00:00:01";
 		
 		try {
-			if( email.equals("notset") || pw.equals("notset") || 
+			if( name.equals("notset") || email.equals("notset") || pw.equals("notset") || 
 				token.equals("notset") || date.equals("1999-12-12 00:00:00") ) {
 				throw new ParseException("Parse exception", 0);
 			}
 			Date sharedDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(date);
 			
+			setName(name);
 			setEmail(email);
 			setPw(pw);
 			setExpirationDate(sharedDate); 
 			setToken(token);
+			setLoggedOut(loggedOut);
 			return true;
 		} catch (ParseException e) {
 			return false;
@@ -142,9 +146,11 @@ public class BusPhoneClient extends Application {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		
+		editor.putString("name", name);
 		editor.putString("email", email);
 		editor.putString("pw", pw);
 		editor.putString("token", token);
+		editor.putBoolean("loggedOut", loggedOut);
 		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format), Locale.getDefault());
 		editor.putString("expirationDate", dFormat.format(expirationDate).toString());
 //		editor.putString("expirationDate", "1998-1-1 01:01:01");

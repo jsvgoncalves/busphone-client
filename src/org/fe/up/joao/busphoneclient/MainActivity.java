@@ -21,6 +21,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -59,15 +60,18 @@ public class MainActivity extends Activity {
 	 */
 	public void loginAction(View v){
 		v.setEnabled(false);
+		Button createAccbt = (Button) findViewById(R.id.button_register);
+		createAccbt.setEnabled(false);
 		String email = ((EditText) findViewById(R.id.form_email)).getText().toString();
 		String pw = ((EditText) findViewById(R.id.form_pw)).getText().toString();
 		
-		if (email != "" && pw != "") {
+		if (!email.equals("") && !pw.equals("")) {
 			bus.setEmail(email);
 			bus.setPw(pw);
 			doLogin();
 		} else {
-			v.setEnabled(false);
+			v.setEnabled(true);
+			createAccbt.setEnabled(true);
 		}
 	}
 
@@ -101,7 +105,8 @@ public class MainActivity extends Activity {
 			bus.setToken(token);
 			bus.setUser_id(user_id);
 			bus.setExpirationDate(expirationDate);
-
+			bus.setLoggedOut(false);
+			
 			// Everything is fine so load the user info
 			new ComService(
 					"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
@@ -110,6 +115,7 @@ public class MainActivity extends Activity {
 		} else {
 			Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
 			findViewById(R.id.button_login).setEnabled(true);
+			findViewById(R.id.button_register).setEnabled(true);
 		}
 	}
 	
@@ -188,8 +194,8 @@ public class MainActivity extends Activity {
 	private void startHome() {
 		Intent intent = new Intent(this, HomeActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME); // Clears the Main Activity
-		startActivityForResult(intent, 1); // Request Code identifies the activity I'm launching, so, Home = 1
-		
+		startActivity(intent);
+		finish();
 	}
 	
 	/**
@@ -204,24 +210,6 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	/**
-	 * Called after the user leaves the Home screen.
-	 * If the logout button was pressed, RESULT_CANCELED is returned
-	 * and the app must allow the user to re-log. Otherwise,
-	 * just leave the app.
-	 */
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (resultCode == RESULT_CANCELED) {
-			// The user logged out.
-			setContentView(R.layout.activity_main);
-		} else if (resultCode == RESULT_OK) {
-			// The user left the app
-			finish();
-		}
-	}
-
 	@Override
 	public void onStop() {
 		super.onStop();
