@@ -1,5 +1,8 @@
 package org.fe.up.joao.busphoneclient;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -66,13 +69,44 @@ public class MainActivity extends Activity {
 		String pw = ((EditText) findViewById(R.id.form_pw)).getText().toString();
 		
 		if (!email.equals("") && !pw.equals("")) {
-			bus.setEmail(email);
-			bus.setPw(pw);
+			
+			bus.setEmail(hashMD5(email));
+			bus.setPw(hashMD5(pw));
 			doLogin();
 		} else {
 			v.setEnabled(true);
 			createAccbt.setEnabled(true);
 		}
+	}
+
+	/**
+	 * 
+	 * @param str
+	 * @return
+	 */
+	private String hashMD5(String str) {
+		byte[] bytesOfMessage;
+		byte[] hashed = null;
+		try {
+			
+			bytesOfMessage = str.getBytes("UTF-8");
+			MessageDigest md;
+			md = MessageDigest.getInstance("MD5");
+			hashed = md.digest(bytesOfMessage);
+			StringBuffer sb = new StringBuffer();
+	        for (int i = 0; i < hashed.length; i++) {
+	          sb.append(Integer.toString((hashed[i] & 0xff) + 0x100, 16).substring(1));
+	        }
+	        return sb.toString();
+	   
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 	/**
