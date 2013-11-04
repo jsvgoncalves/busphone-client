@@ -28,6 +28,7 @@
     
     <!-- For toasts -->
     <string name="loginexception">Por favor tente novamente.</string>
+    <string name="no_tickets_for_you">Bilhetes esgotados.</string>
     
     
     <!--  For user forms -->
@@ -39,6 +40,8 @@
     <string name="form_email">E-mail</string>
     <string name="login">Entrar</string>
     <string name="register">Nova Conta</string>
+    
+    
     
 
 </resources>

@@ -31,81 +31,87 @@ import android.widget.ImageView;
 public class UseTicketActivity  extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		String ticket_type = "0";
+		String ticket_type = getIntent().getStringExtra("ticket_type");
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_use_ticket);
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-		    ticket_type = extras.getString("ticket_type");
+			ticket_type = extras.getString("ticket_type");
 		}
+
+		String codeMessage = User.getID() + ";";
+		// Log.v("mylog", "Ticket type is " + ticket_type);
 		
-		
-		Log.v("mylog", "Ticket type is " + ticket_type);
 		if(ticket_type.equals("T1")) {
 			Button bt1 = (Button) findViewById(R.id.t1button);
 			bt1.setBackgroundColor(0xFF0000FF);
+			codeMessage += User.ticketsT1.get(0).id;
 		} else if(ticket_type.equals("T2")) {
 			Button bt1 = (Button) findViewById(R.id.t2button);
 			bt1.setBackgroundColor(0xFF0000FF);
+			codeMessage += User.ticketsT2.get(0).id;
 		} else if(ticket_type.equals("T3")) {
 			Button bt1 = (Button) findViewById(R.id.t3button);
 			bt1.setBackgroundColor(0xFF0000FF);
+			codeMessage += User.ticketsT3.get(0).id;
 		}
-	 
-		updateQRCode();
+
+
+		updateQRCode(codeMessage);
 	}
-	
+
 	public void buttonClicked(View view) {
 		final Button bt = (Button) view;
-//		Log.v("mylog", bt.getText().toString());
-		
+		//		Log.v("mylog", bt.getText().toString());
+
 		Intent intent = getIntent();
 		intent.putExtra("ticket_type", bt.getText().toString());
 		finish();
 		startActivity(intent);
 	}
-	
-	protected void updateQRCode(){
+
+	protected void updateQRCode(String qrMessage){
+
 		// ImageView to display the QR code in.  This should be defined in 
 		// your Activity's XML layout file
 		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
-	
+
 		if (!User.ticketsHistory.isEmpty()) {
 			String qrData = User.ticketsHistory.get(0).uuid;
 			int qrCodeDimention = 500;
 			System.out.println("Ticket history is empty.");
 			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
-			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-		
+					Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
+
 			try {
-			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-			    imageView.setImageBitmap(bitmap);
+				Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+				imageView.setImageBitmap(bitmap);
 			} catch (WriterException e) {
-			    e.printStackTrace();
+				e.printStackTrace();
 			}
 		} else {
 			int qrCodeDimention = 500;
-			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder("bananas", null,
-			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-		
+			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrMessage, null,
+					Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
+
 			try {
-			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-			    imageView.setImageBitmap(bitmap);
+				Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+				imageView.setImageBitmap(bitmap);
 			} catch (WriterException e) {
-			    e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    // Respond to the action bar's Up/Home button
-	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

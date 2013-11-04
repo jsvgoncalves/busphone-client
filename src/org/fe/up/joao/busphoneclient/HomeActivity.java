@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * This activity is display upon login.
@@ -69,15 +70,51 @@ public class HomeActivity extends Activity {
 	}
 	
 	/**
-	 * Handler for ticket buttons
-	 * @param view
+	 * Handler for ticket button T1 
 	 */
-	public void buttonClicked(View view) {
-		final Button bt = (Button) view;
-//		Log.v("mylog", bt.getText().toString());
-		Intent intent = new Intent(this, UseTicketActivity.class);
-		intent.putExtra("ticket_type", bt.getText().toString());
-		startActivity(intent);
+	public void buttonClickedT1(View view) {
+		if(User.ticketsT1.isEmpty()) {
+			Toast toast = new Toast(getBaseContext());
+			toast.setText(getString(R.string.no_tickets_for_you));
+			toast.setDuration(Toast.LENGTH_SHORT);
+			toast.show();
+		} else {
+			Intent intent = new Intent(this, UseTicketActivity.class);
+			intent.putExtra("ticket_type", "T1");
+			startActivity(intent);
+		}
+	}
+	
+	/**
+	 * Handler for ticket button T2
+	 */ 
+	public void buttonClickedT2(View view) {
+		if(User.ticketsT2.isEmpty()) {
+			Toast toast = new Toast(getBaseContext());
+			toast.setText(getString(R.string.no_tickets_for_you));
+			toast.setDuration(Toast.LENGTH_SHORT);
+			toast.show();
+		} else {
+			Intent intent = new Intent(this, UseTicketActivity.class);
+			intent.putExtra("ticket_type", "T2");
+			startActivity(intent);
+		}
+	}
+	
+	/**
+	 * Handler for ticket button T3
+	 */
+	public void buttonClickedT3(View view) {
+		if(User.ticketsT3.isEmpty()) {
+			Toast toast = new Toast(getBaseContext());
+			toast.setText(getString(R.string.no_tickets_for_you));
+			toast.setDuration(Toast.LENGTH_SHORT);
+			toast.show();
+		} else {
+			Intent intent = new Intent(this, UseTicketActivity.class);
+			intent.putExtra("ticket_type", "T3");
+			startActivity(intent);
+		}
 	}
 	
 	protected void updateQRCode(){
