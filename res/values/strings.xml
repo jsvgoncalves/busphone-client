@@ -4,6 +4,7 @@
     <string name="app_name">BusPhone</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="logout">Logout</string>
     
     <string name="button_buy_tickets">Comprar Bilhetes</string>
     <string name="button_charge_acc">Carregar Conta</string>

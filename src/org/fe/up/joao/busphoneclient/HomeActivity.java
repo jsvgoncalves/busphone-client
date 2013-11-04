@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -49,21 +50,22 @@ public class HomeActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// TODO Auto-generated method stub
-		boolean su = super.onCreateOptionsMenu(menu);
-		menu.add("Logout");
-		
-		return true && su;
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+	    return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		String choice = item.getTitle().toString();
-		if (choice == "Logout") {
-			logout();
-		}
-		return super.onOptionsItemSelected(item);
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.logout:
+//	            logout();
+	        	Log.v("mylog", "logging out");
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 	
 	public void buttonClicked(View view) {

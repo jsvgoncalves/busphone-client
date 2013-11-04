@@ -10,9 +10,6 @@ import org.fe.up.joao.busphoneclient.R;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.util.Log;
 
 public class BusPhoneClient extends Application {
 	private static BusPhoneClient instance;
@@ -25,7 +22,7 @@ public class BusPhoneClient extends Application {
 	private String pw;
 	private Date expirationDate;
 	
-	private boolean loggedOut;
+	private boolean loggedOut = true;
 	
 	private String PREFS_NAME = "login";
 	private boolean loadedPrefs = false;
