@@ -170,7 +170,7 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	private void parseTickets(JSONObject json) {
+	public static void parseTickets(JSONObject json) {
 		ArrayList<String> t1 = JSONHelper.getArray(json, "user", "tickets", "t1");
 		ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
 		ArrayList<String> t3 = JSONHelper.getArray(json, "user", "tickets", "t3");

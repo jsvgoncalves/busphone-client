@@ -110,6 +110,7 @@ public class BusPhoneClient extends Application {
 	private boolean checkSharedPrefs() {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		
+		String userid = settings.getString("userid", "notset");
 		String name = settings.getString("name", "notset");
 		String email = settings.getString("email", "notset");
 		String pw = settings.getString("pw", "notset");
@@ -120,13 +121,14 @@ public class BusPhoneClient extends Application {
 		
 		try {
 			if( name.equals("notset") || email.equals("notset") || pw.equals("notset") || 
-				token.equals("notset") || date.equals("1999-12-12 00:00:00") ) {
+				userid.equals("notset") || token.equals("notset") || date.equals("1999-12-12 00:00:00") ) {
 				throw new ParseException("Parse exception", 0);
 			}
 			Date sharedDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(date);
 			
 			setName(name);
 			setEmail(email);
+			setUser_id(userid);
 			setPw(pw);
 			setExpirationDate(sharedDate); 
 			setToken(token);
@@ -146,6 +148,7 @@ public class BusPhoneClient extends Application {
 		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		
+		editor.putString("userid", user_id);
 		editor.putString("name", name);
 		editor.putString("email", email);
 		editor.putString("pw", pw);

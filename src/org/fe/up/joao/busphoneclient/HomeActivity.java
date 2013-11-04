@@ -1,9 +1,13 @@
 package org.fe.up.joao.busphoneclient;
 
+import org.fe.up.joao.busphoneclient.helper.ComService;
 import org.fe.up.joao.busphoneclient.helper.Contents;
+import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.User;
+import org.json.JSONObject;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import android.app.ActionBar;
@@ -60,15 +64,44 @@ public class HomeActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
 	    switch (item.getItemId()) {
-	        case R.id.logout:
+	        case R.id.action_logout:
 	            logout();
 	        	Log.v("mylog", "logging out");
+	            return true;
+	        case R.id.action_refresh:
+	            refreshData();
+	        	Log.v("mylog", "refreshing");
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
 	
+	private void refreshData() {
+		// Everything is fine so load the user info
+		new ComService(
+				"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
+				HomeActivity.this, 
+				"getUserInfoDone");
+		
+	}
+	
+	public void getUserInfoDone(String result) {
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		if(status.equals("0")) {
+			String name = JSONHelper.getValue(json, "user", "name");
+			bus.setName(name);
+			
+			// Parse the tickets
+			MainActivity.parseTickets(json);
+			updateTickets();
+			Toast.makeText(getApplicationContext(), "Atualizado", Toast.LENGTH_LONG).show();
+		} else {
+			Toast.makeText(getApplicationContext(), "Falha ao atualizar", Toast.LENGTH_LONG).show();
+		}
+	}
+
 	/**
 	 * Handler for ticket button T1 
 	 */

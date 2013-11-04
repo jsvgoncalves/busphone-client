@@ -111,6 +111,10 @@ public class UseTicketActivity  extends Activity {
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
+/*		case android.R.id.actio:
+			NavUtils.navigateUpFromSameTask(this);
+			return true;*/
+		
 		}
 		return super.onOptionsItemSelected(item);
 	}
