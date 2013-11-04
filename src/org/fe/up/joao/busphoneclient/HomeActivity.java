@@ -1,10 +1,14 @@
 package org.fe.up.joao.busphoneclient;
 
+import java.util.ArrayList;
+
 import org.fe.up.joao.busphoneclient.helper.ComService;
 import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.helper.TicketsDataSource;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
+import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONObject;
 
@@ -51,6 +55,9 @@ public class HomeActivity extends Activity {
 		setUserName();
 		updateTickets();
 //		updateQRCode();	
+		TicketsDataSource db = new TicketsDataSource(this);
+		ArrayList<Ticket> tickets = db.getAllTickets();
+		Log.v("mylog", "got tickets: " + tickets.size());
 	}
 	
 	@Override
@@ -211,5 +218,14 @@ public class HomeActivity extends Activity {
 	public void onStop() {
 		super.onStop();
 		Log.v("mylog", "stopping home");
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		TicketsDataSource db = new TicketsDataSource(getApplicationContext());
+		for (Ticket ticket : User.ticketsT1) {
+			db.insertTicket(ticket);
+		}
 	}
 }
