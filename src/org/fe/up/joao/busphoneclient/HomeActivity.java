@@ -48,8 +48,10 @@ public class HomeActivity extends Activity {
 		bus = (BusPhoneClient) getApplicationContext();
 		setContentView(R.layout.activity_home);
 		
+		refreshData();
 		setUserName();
 		updateTickets();
+		
 //		updateQRCode();	
 	}
 	
