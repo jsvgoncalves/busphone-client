@@ -20,6 +20,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" 
         android:name="org.fe.up.joao.busphoneclient.model.BusPhoneClient" >
+       
         <activity
             android:name="org.fe.up.joao.busphoneclient.MainActivity"
             android:label="@string/app_name" >
@@ -29,14 +30,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
             android:name="org.fe.up.joao.busphoneclient.HomeActivity"
             android:label="@string/app_name" >
         </activity>
+        
         <activity
             android:name="org.fe.up.joao.busphoneclient.UseTicketActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:parentActivityName="org.fe.up.joao.busphoneclient.HomeActivity" >
+       		<!-- Parent activity meta-data to support 4.0 and lower -->
+       		<meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="org.fe.up.joao.busphoneclient.HomeActivity" />
         </activity>
+        
     </application>
 
 </manifest>
