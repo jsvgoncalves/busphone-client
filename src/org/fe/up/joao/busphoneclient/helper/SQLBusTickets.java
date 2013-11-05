@@ -24,7 +24,7 @@ public class SQLBusTickets extends SQLiteOpenHelper {
 	
 	public SQLBusTickets(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		db = getWritableDatabase();
+//		db = getWritableDatabase();
 		Log.v("mylog", "constructed sql");
     }
 	

@@ -16,7 +16,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/form_email" android:inputType="textEmailAddress">
+        android:hint="@string/form_email"
+        android:inputType="textEmailAddress"
+        android:text="jsvgoncalves@gmail.com">
 
         <requestFocus />
     </EditText>
@@ -27,7 +29,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/form_pw"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="123456" />
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"

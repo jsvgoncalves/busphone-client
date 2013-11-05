@@ -161,66 +161,16 @@ public class MainActivity extends Activity {
 			bus.setName(name);
 			
 			// Parse the tickets
-			parseTickets(json);
+			User.parseTickets(json);
+			User.updateTicketsDB(this);
 			
-			Toast.makeText(getApplicationContext(), "Bem vindo " + bus.getName(), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, "Bem vindo " + bus.getName(), Toast.LENGTH_LONG).show();
 			startHome();
 		} else {
 			Toast.makeText(getApplicationContext(), "Qualquer coisa correu mal :(", Toast.LENGTH_LONG).show();
 		}
 	}
 
-	public static void parseTickets(JSONObject json) {
-		ArrayList<String> t1 = JSONHelper.getArray(json, "user", "tickets", "t1");
-		ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
-		ArrayList<String> t3 = JSONHelper.getArray(json, "user", "tickets", "t3");
-		
-		for (String ticketStr : t1) {
-			json = JSONHelper.string2JSON(ticketStr);
-			try {
-				Ticket t = new Ticket(json.getString("id"),
-						json.getString("ticket_type"),
-						json.getString("uuid"),
-						json.getString("created_at"),
-						json.getString("updated_at"));
-				User.ticketsT1.add(t);
-			} catch (JSONException e) {
-				System.err.println(e.toString());
-				System.err.println("Invalid JSON while retrieving tickets!");
-			}
-		}
-		
-		for (String ticketStr : t2) {
-			json = JSONHelper.string2JSON(ticketStr);
-			try {
-				Ticket t = new Ticket(json.getString("id"),
-						json.getString("ticket_type"),
-						json.getString("uuid"),
-						json.getString("created_at"),
-						json.getString("updated_at"));
-				User.ticketsT2.add(t);
-			} catch (JSONException e) {
-				System.err.println(e.toString());
-				System.err.println("Invalid JSON while retrieving tickets!");
-			}
-		}
-		
-		for (String ticketStr : t3) {
-			json = JSONHelper.string2JSON(ticketStr);
-			try {
-				Ticket t = new Ticket(json.getString("id"),
-						json.getString("ticket_type"),
-						json.getString("uuid"),
-						json.getString("created_at"),
-						json.getString("updated_at"));
-				User.ticketsT3.add(t);
-			} catch (JSONException e) {
-				System.err.println(e.toString());
-				System.err.println("Invalid JSON while retrieving tickets!");
-			}
-		}
-		
-	}
 
 	/**
 	 * Launches the home activity and finishes this.
