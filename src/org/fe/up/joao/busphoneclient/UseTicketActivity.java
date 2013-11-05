@@ -19,6 +19,7 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -38,10 +39,13 @@ public class UseTicketActivity  extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		ticket_type = getIntent().getStringExtra("ticket_type");
+		
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_use_ticket);
+		ticket_type = getIntent().getStringExtra("ticket_type");
+		
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			ticket_type = extras.getString("ticket_type");
@@ -136,20 +140,20 @@ public class UseTicketActivity  extends Activity {
 		finish();
 	}
 
-	@Override
+/*	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		// Respond to the action bar's Up/Home button
 		case android.R.id.home:
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
-/*		case android.R.id.actio:
+		case android.R.id.actio:
 			NavUtils.navigateUpFromSameTask(this);
-			return true;*/
+			return true;
 		
 		}
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 
 	@Override
 	public void onPause() {
