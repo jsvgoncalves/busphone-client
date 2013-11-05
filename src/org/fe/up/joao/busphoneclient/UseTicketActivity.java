@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.graphics.PorterDuff;
 
 /**
  * Provides an enlarged version of the ticket
@@ -45,15 +46,18 @@ public class UseTicketActivity  extends Activity {
 		
 		if(ticket_type.equals("T1")) {
 			Button bt1 = (Button) findViewById(R.id.t1button);
-			bt1.setBackgroundColor(0xFF0000FF);
+			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+			bt1.setEnabled(false);
 			codeMessage += User.ticketsT1.get(0).id;
 		} else if(ticket_type.equals("T2")) {
 			Button bt1 = (Button) findViewById(R.id.t2button);
-			bt1.setBackgroundColor(0xFF0000FF);
+			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+			bt1.setEnabled(false);
 			codeMessage += User.ticketsT2.get(0).id;
 		} else if(ticket_type.equals("T3")) {
 			Button bt1 = (Button) findViewById(R.id.t3button);
-			bt1.setBackgroundColor(0xFF0000FF);
+			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+			bt1.setEnabled(false);
 			codeMessage += User.ticketsT3.get(0).id;
 		}
 
@@ -62,11 +66,21 @@ public class UseTicketActivity  extends Activity {
 	}
 
 	public void buttonClicked(View view) {
+		// Disable all the buttons
+		Button bt1 = (Button) findViewById(R.id.t1button);
+		Button bt2 = (Button) findViewById(R.id.t2button);
+		Button bt3 = (Button) findViewById(R.id.t3button);
+		bt1.setEnabled(false);
+		bt2.setEnabled(false);
+		bt3.setEnabled(false);
+		
 		final Button bt = (Button) view;
 		//		Log.v("mylog", bt.getText().toString());
 
 		Intent intent = getIntent();
 		intent.putExtra("ticket_type", bt.getText().toString());
+		// Removes the animation to prevent weird effects on multiple clicks
+		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 		finish();
 		startActivity(intent);
 	}
@@ -117,5 +131,12 @@ public class UseTicketActivity  extends Activity {
 		
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	public void onPause() {
+		overridePendingTransition(0, 0);
+		super.onPause();
+		
 	}
 }

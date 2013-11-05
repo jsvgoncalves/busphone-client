@@ -46,7 +46,7 @@ public class HomeActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-//		Log.v("mylog", "network: " + ComHelper.isOnline(this));
+//		Log.v("mylog", "network: " + ComHelper.isOnline(this)); // TODO check if the user has net.
 		super.onCreate(savedInstanceState);
 		bus = (BusPhoneClient) getApplicationContext();
 		setContentView(R.layout.activity_home);
@@ -55,7 +55,7 @@ public class HomeActivity extends Activity {
 		updateUsernameDisplay();
 		updateTicketsDisplay();
 
-//		updateQRCode();	
+//		updateQRCode();	// TODO Update QR code
 	}
 	
 	@Override
@@ -112,49 +112,40 @@ public class HomeActivity extends Activity {
 	 * Handler for ticket button T1 
 	 */
 	public void buttonClickedT1(View view) {
-		if(User.ticketsT1.isEmpty()) {
-			Toast toast = new Toast(getBaseContext());
-			toast.setText(getString(R.string.no_tickets_for_you));
-			toast.setDuration(Toast.LENGTH_SHORT);
-			toast.show();
-		} else {
-			Intent intent = new Intent(this, UseTicketActivity.class);
-			intent.putExtra("ticket_type", "T1");
-			startActivity(intent);
-		}
+		startUseTicket(User.ticketsT1, "T1");
 	}
 	
 	/**
 	 * Handler for ticket button T2
 	 */ 
 	public void buttonClickedT2(View view) {
-		if(User.ticketsT2.isEmpty()) {
-			Toast toast = new Toast(getBaseContext());
-			toast.setText(getString(R.string.no_tickets_for_you));
-			toast.setDuration(Toast.LENGTH_SHORT);
-			toast.show();
-		} else {
-			Intent intent = new Intent(this, UseTicketActivity.class);
-			intent.putExtra("ticket_type", "T2");
-			startActivity(intent);
-		}
+		startUseTicket(User.ticketsT2, "T2");
 	}
 	
 	/**
 	 * Handler for ticket button T3
 	 */
 	public void buttonClickedT3(View view) {
-		if(User.ticketsT3.isEmpty()) {
+		startUseTicket(User.ticketsT3, "T2");
+	}
+
+	/**
+	 *
+	 */
+	private void startUseTicket(ArrayList<Ticket> tickets, String type) {
+		if(tickets.isEmpty()) {
 			Toast toast = new Toast(getBaseContext());
 			toast.setText(getString(R.string.no_tickets_for_you));
 			toast.setDuration(Toast.LENGTH_SHORT);
 			toast.show();
 		} else {
 			Intent intent = new Intent(this, UseTicketActivity.class);
-			intent.putExtra("ticket_type", "T3");
+			intent.putExtra("ticket_type", type);
 			startActivity(intent);
 		}
 	}
+	
+	
 	
 	protected void updateQRCode(){
 		// ImageView to display the QR code in.  This should be defined in 
