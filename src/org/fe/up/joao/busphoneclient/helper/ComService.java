@@ -14,7 +14,7 @@ import android.util.Log;
 public class ComService extends AsyncTask<String, String, String> {
 	
 	public static String serverURL = "http://busphone-service.herokuapp.com/";
-	ProgressDialog Asycdialog;
+	ProgressDialog dialog;
 	String methodName;
 	Object object;
 	
@@ -22,15 +22,16 @@ public class ComService extends AsyncTask<String, String, String> {
 	protected void onPreExecute(){}
 	
 	public ComService(String url, Object object, String methodName) {
-		Asycdialog = new ProgressDialog((Context) object);
+		dialog = new ProgressDialog((Context) object);
 		String full_url = serverURL + url;
 		this.methodName = methodName;
 		this.object = object;
 		this.execute(full_url);
 		//set message of the dialog
-        Asycdialog.setMessage("Fetching data.");
+        dialog.setMessage("Fetching data.");
+        dialog.setCancelable(false);
         //show dialog
-        Asycdialog.show();
+        dialog.show();
         super.onPreExecute();
 	}
 
@@ -45,7 +46,7 @@ public class ComService extends AsyncTask<String, String, String> {
 //		Log.v("mylog", "result " + result);
 		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
-		Asycdialog.dismiss();
+		dialog.dismiss();
 		try {
 			Method method = object.getClass().getMethod(methodName, String.class);
 			method.invoke(object, result);
