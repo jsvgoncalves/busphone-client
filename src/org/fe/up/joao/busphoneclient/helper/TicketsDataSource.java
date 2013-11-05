@@ -9,7 +9,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class TicketsDataSource {
 
@@ -18,6 +17,7 @@ public class TicketsDataSource {
 	private SQLBusTickets busSQL;
 	private String[] allColumns = { 
 			SQLBusTickets.FIELD_TICKET_ID,
+			SQLBusTickets.FIELD_TICKET_UUID,
 			SQLBusTickets.FIELD_TICKET_TYPE };
 
 	public TicketsDataSource(Context context) {
@@ -53,7 +53,6 @@ public class TicketsDataSource {
 	 * @return the database id of the recently inserted ticket
 	 */
 	public long insertTicket(Ticket ticket) {
-		Log.v("mylog", "inserting ticket with uuid" + ticket.uuid);
 		ContentValues values = new ContentValues();
 		values.put(SQLBusTickets.FIELD_TICKET_TYPE, ticket.ticket_type);
 		values.put(SQLBusTickets.FIELD_TICKET_UUID, ticket.uuid);
@@ -98,7 +97,6 @@ public class TicketsDataSource {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Log.v("mylog", "fetched ticket " + cursor.getString(1));
 			Ticket ticket = cursorToTicket(cursor);
 			tickets.add(ticket);
 			cursor.moveToNext();
@@ -117,7 +115,6 @@ public class TicketsDataSource {
 
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			Log.v("mylog", "fetched ticket " + cursor.getString(1));
 			Ticket ticket = cursorToTicket(cursor);
 			tickets.add(ticket);
 			cursor.moveToNext();
@@ -134,8 +131,9 @@ public class TicketsDataSource {
 
 	private Ticket cursorToTicket(Cursor cursor) {
 		Ticket ticket = new Ticket();
-		//	    ticket.setid(cursor.getLong(0));
-		//	    ticket.settype(cursor.getString(1));
+		ticket.id = (int) cursor.getLong(0);
+		ticket.ticket_type = Integer.parseInt(cursor.getString(2));
+		ticket.uuid = cursor.getString(1);
 		return ticket;
 	}
 }

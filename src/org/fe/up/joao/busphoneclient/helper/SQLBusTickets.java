@@ -25,27 +25,17 @@ public class SQLBusTickets extends SQLiteOpenHelper {
 	public SQLBusTickets(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 //		db = getWritableDatabase();
-		Log.v("mylog", "constructed sql");
     }
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		Log.v("mylog", "constructed sql2");
 		 db.execSQL(TICKETS_TABLE_CREATE);
-		 Log.v("mylog", "created table");
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TICKETS);
         onCreate(db);
-	}
-	
-	public String[] getTickets(int ticket_type) {
-		String[] fields = {FIELD_TICKET_ID, FIELD_TICKET_TYPE};
-//		this.query(false, TICKETS_TABLE_NAME, fields, "");
-//		query (boolean distinct, String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy, String limit)
-		return null;
 	}
 
 }

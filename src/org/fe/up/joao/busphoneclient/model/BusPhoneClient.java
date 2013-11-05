@@ -61,6 +61,7 @@ public class BusPhoneClient extends Application {
 
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
+		User.setID(Integer.parseInt(user_id));
 	}
 
 	public static boolean hasLogin() {

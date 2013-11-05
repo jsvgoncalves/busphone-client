@@ -1,7 +1,10 @@
 package org.fe.up.joao.busphoneclient;
 
+import java.util.ArrayList;
+
 import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
 
@@ -40,25 +43,26 @@ public class UseTicketActivity  extends Activity {
 		if (extras != null) {
 			ticket_type = extras.getString("ticket_type");
 		}
-
-		String codeMessage = User.getID() + ";";
+		
+		String codeMessage = ((BusPhoneClient) getApplicationContext()).getUser_id()  + ";";
 		// Log.v("mylog", "Ticket type is " + ticket_type);
 		
 		if(ticket_type.equals("T1")) {
 			Button bt1 = (Button) findViewById(R.id.t1button);
 			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			codeMessage += User.ticketsT1.get(0).id;
+			ArrayList<Ticket> t = User.ticketsT1;
+			codeMessage += User.ticketsT1.get(0).uuid;
 		} else if(ticket_type.equals("T2")) {
 			Button bt1 = (Button) findViewById(R.id.t2button);
 			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			codeMessage += User.ticketsT2.get(0).id;
+			codeMessage += User.ticketsT2.get(0).uuid;
 		} else if(ticket_type.equals("T3")) {
 			Button bt1 = (Button) findViewById(R.id.t3button);
 			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			codeMessage += User.ticketsT3.get(0).id;
+			codeMessage += User.ticketsT3.get(0).uuid;
 		}
 
 
