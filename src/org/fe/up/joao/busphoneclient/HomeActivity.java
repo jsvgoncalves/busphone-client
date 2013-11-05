@@ -1,10 +1,14 @@
 package org.fe.up.joao.busphoneclient;
 
+import java.util.ArrayList;
+
 import org.fe.up.joao.busphoneclient.helper.ComService;
 import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.helper.TicketsDataSource;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
+import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONObject;
 
@@ -44,14 +48,13 @@ public class HomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 //		Log.v("mylog", "network: " + ComHelper.isOnline(this));
 		super.onCreate(savedInstanceState);
-		setResult(RESULT_OK); // ->RESULT_OK means it's not a logout. THe user just left the app.
 		bus = (BusPhoneClient) getApplicationContext();
 		setContentView(R.layout.activity_home);
 		
-		refreshData();
-		setUserName();
-		updateTickets();
-		
+		User.fetchTicketsFromDB(this);
+		updateUsernameDisplay();
+		updateTicketsDisplay();
+
 //		updateQRCode();	
 	}
 	
@@ -96,8 +99,9 @@ public class HomeActivity extends Activity {
 			bus.setName(name);
 			
 			// Parse the tickets
-			MainActivity.parseTickets(json);
-			updateTickets();
+			User.parseTickets(json);
+			updateTicketsDisplay();
+			User.updateTicketsDB(this);
 			Toast.makeText(getApplicationContext(), "Atualizado", Toast.LENGTH_LONG).show();
 		} else {
 			Toast.makeText(getApplicationContext(), "Falha ao atualizar", Toast.LENGTH_LONG).show();
@@ -185,12 +189,12 @@ public class HomeActivity extends Activity {
 	}
 	
 	
-	public void setUserName() {
+	public void updateUsernameDisplay() {
 		TextView userName = (TextView) findViewById(R.id.using_ticket);
 		userName.setText(String.format( getString(R.string.greeting), bus.getName()));
 	}
 	
-	public void updateTickets() {
+	public void updateTicketsDisplay() {
 		Button buttonT1 = (Button) findViewById(R.id.t1button);
 		Button buttonT2 = (Button) findViewById(R.id.t2button);
 		Button buttonT3 = (Button) findViewById(R.id.t3button);
@@ -198,6 +202,7 @@ public class HomeActivity extends Activity {
 		buttonT1.setText(getString(R.string.t1) + "\nx" + User.ticketsT1.size());
 		buttonT2.setText(getString(R.string.t2) + "\nx" + User.ticketsT2.size());
 		buttonT3.setText(getString(R.string.t3) + "\nx" + User.ticketsT3.size());
+		
 	}
 
 	public void logout(){
@@ -213,5 +218,14 @@ public class HomeActivity extends Activity {
 	public void onStop() {
 		super.onStop();
 		Log.v("mylog", "stopping home");
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		TicketsDataSource db = new TicketsDataSource(getApplicationContext());
+		for (Ticket ticket : User.ticketsT1) {
+			db.insertTicket(ticket);
+		}
 	}
 }
