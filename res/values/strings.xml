@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Generic  -->
     <string name="app_name">BusPhone</string>
     <string name="action_settings">Definições</string>
     <string name="hello_world">Hello world!</string>
     <string name="logout">Sair</string>
+    <string name="cancel">Cancelar</string>
     <string name="refresh">Atualizar</string>
+    
     
     <string name="button_buy_tickets">Comprar Bilhetes</string>
     <string name="button_charge_acc">Carregar Conta</string>
@@ -34,16 +37,19 @@
     <!--  For user forms -->
     <string name="form_name">Nome</string>
     <string name="form_pw">Password</string>
+    <string name="form_pw_repeat">Repetir Password</string>
     <string name="form_ccnum">Nº Cartão Crédito</string>
     <string name="form_ccval">Validade do Cartão</string>
     <string name="form_cccod">Código Validação</string>
     <string name="form_email">E-mail</string>
     <string name="login">Entrar</string>
     <string name="register">Nova Conta</string>
+    <string name="create">Criar</string>
     
     
-    <string name="cancel">Cancelar</string>
     <string name="validate">Validar</string>
+    
+    
     
     
 

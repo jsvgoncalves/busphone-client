@@ -78,6 +78,17 @@ public class MainActivity extends Activity {
 			createAccbt.setEnabled(true);
 		}
 	}
+	
+	/**
+	 * Register button action handler
+	 * @param v
+	 */
+	public void registerAction(View v) {
+		Intent intent = new Intent(this, RegisterActivity.class);
+//		intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME); // Clears the Main Activity
+		startActivity(intent);
+//		finish();
+	}
 
 	/**
 	 * 

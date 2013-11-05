@@ -36,6 +36,11 @@
             android:label="@string/app_name" >
         </activity>
         
+         <activity
+            android:name="org.fe.up.joao.busphoneclient.RegisterActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
         <activity
             android:name="org.fe.up.joao.busphoneclient.UseTicketActivity"
             android:label="@string/app_name"
