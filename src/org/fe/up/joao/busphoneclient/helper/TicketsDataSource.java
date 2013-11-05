@@ -60,13 +60,13 @@ public class TicketsDataSource {
 		return db.insert(SQLBusTickets.TABLE_TICKETS, null, values);
 	}
 
-	//	  public void deleteComment(Ticket ticket) {
-	//	    long id = ticket.getId();
-	//	    System.out.println("Comment deleted with id: " + id);
-	//	    database.delete(SQLBusTickets.TABLE_TICKETS, SQLBusTickets.FIELD_TICKET_ID
-	//	        + " = " + id, null);
-	//	  }
-
+	public void deleteTicket(Ticket ticket) {
+		long id = ticket.id;
+		
+		db.delete(SQLBusTickets.TABLE_TICKETS, SQLBusTickets.FIELD_TICKET_ID
+		+ " = " + id, null);
+	}
+	
 	/*List<Contact> contactList = new ArrayList<Contact>();
 	// Select All Query
 	String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;

@@ -172,7 +172,7 @@ public class HomeActivity extends Activity {
 	 * Handler for ticket button T3
 	 */
 	public void buttonClickedT3(View view) {
-		startUseTicket(User.ticketsT3, "T2");
+		startUseTicket(User.ticketsT3, "T3");
 	}
 
 	/**
@@ -180,10 +180,7 @@ public class HomeActivity extends Activity {
 	 */
 	private void startUseTicket(ArrayList<Ticket> tickets, String type) {
 		if(tickets.isEmpty()) {
-			Toast toast = new Toast(getBaseContext());
-			toast.setText(getString(R.string.no_tickets_for_you));
-			toast.setDuration(Toast.LENGTH_SHORT);
-			toast.show();
+			Toast.makeText(this, getString(R.string.no_tickets_for_you), Toast.LENGTH_LONG).show();
 		} else {
 			Intent intent = new Intent(this, UseTicketActivity.class);
 			intent.putExtra("ticket_type", type);
@@ -264,5 +261,12 @@ public class HomeActivity extends Activity {
 		for (Ticket ticket : User.ticketsT1) {
 			db.insertTicket(ticket);
 		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		Log.v("mylog", "resuming");
+		updateTicketsDisplay();
 	}
 }

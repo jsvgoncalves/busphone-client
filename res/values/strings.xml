@@ -42,6 +42,9 @@
     <string name="register">Nova Conta</string>
     
     
+    <string name="cancel">Cancelar</string>
+    <string name="validate">Validar</string>
+    
     
 
 </resources>

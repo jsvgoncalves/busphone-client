@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.graphics.PorterDuff;
 
 /**
@@ -33,9 +34,11 @@ import android.graphics.PorterDuff;
  *
  */
 public class UseTicketActivity  extends Activity {
+	String ticket_type = "T1";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		String ticket_type = getIntent().getStringExtra("ticket_type");
+		ticket_type = getIntent().getStringExtra("ticket_type");
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.activity_use_ticket);
@@ -120,6 +123,17 @@ public class UseTicketActivity  extends Activity {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void cancelClicked(View v) {
+		onBackPressed();
+	}
+	
+	public void validateClicked(View v) {
+		if(!User.validateTicket(this, ticket_type)) {
+			Toast.makeText(this, "Falha a usar o bilhete.", Toast.LENGTH_LONG).show();
+		}
+		finish();
 	}
 
 	@Override

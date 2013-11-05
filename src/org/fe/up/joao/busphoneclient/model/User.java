@@ -2,6 +2,7 @@ package org.fe.up.joao.busphoneclient.model;
 
 import java.util.ArrayList;
 
+import org.fe.up.joao.busphoneclient.R;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.TicketsDataSource;
 import org.json.JSONException;
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Contains any values that are common
@@ -173,5 +175,25 @@ public class User {
 		ticketsT3 = db.getAllTickets(3);
 		
 		
+	}
+
+
+	public static boolean validateTicket(Context context, String ticket_type) {
+		TicketsDataSource db = new TicketsDataSource(context);
+		
+		if(ticket_type.equals("T1")) {
+			db.deleteTicket(ticketsT1.get(0));
+			ticketsT1.remove(0);
+		} else if(ticket_type.equals("T2")) {
+			db.deleteTicket(ticketsT2.get(0));
+			ticketsT2.remove(0);
+		} else if(ticket_type.equals("T3")) {
+			db.deleteTicket(ticketsT3.get(0));
+			ticketsT3.remove(0);
+		} else {
+			return false;
+		}
+		
+		return true;
 	}
 }
