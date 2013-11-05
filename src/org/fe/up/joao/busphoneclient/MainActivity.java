@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
 				expirationDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(expirationDate_string);
 			} catch (ParseException e) {
 				e.printStackTrace();
-				Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+				Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
 				findViewById(R.id.button_login).setEnabled(true);
 			}
 			
@@ -147,7 +147,7 @@ public class MainActivity extends Activity {
 					MainActivity.this, 
 					"getUserInfoDone");
 		} else {
-			Toast.makeText(getApplicationContext(), getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+			Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
 			findViewById(R.id.button_login).setEnabled(true);
 			findViewById(R.id.button_register).setEnabled(true);
 		}

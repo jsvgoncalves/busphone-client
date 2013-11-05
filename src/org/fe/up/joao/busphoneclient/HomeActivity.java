@@ -1,6 +1,10 @@
 package org.fe.up.joao.busphoneclient;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import org.fe.up.joao.busphoneclient.helper.ComService;
 import org.fe.up.joao.busphoneclient.helper.Contents;
@@ -103,8 +107,50 @@ public class HomeActivity extends Activity {
 			updateTicketsDisplay();
 			User.updateTicketsDB(this);
 			Toast.makeText(getApplicationContext(), "Atualizado", Toast.LENGTH_LONG).show();
-		} else {
+		} else if(status.equals("2") || status.equals("1")) {
+			bus.setExpirationDate(new Date());
+			new ComService(
+					"login/" + bus.getEmail() + "/" + bus.getPw(), 
+					HomeActivity.this, 
+					"loginDone");
+		}
+		else {
 			Toast.makeText(getApplicationContext(), "Falha ao atualizar", Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	/** 
+	 * Tries to relogin the user.
+	 * @param result
+	 */
+	public void loginDone(String result) {
+		JSONObject json = JSONHelper.string2JSON(result);
+		String status = JSONHelper.getValue(json, "status");
+		
+		if(status.equals("0")) {
+			String token = JSONHelper.getValue(json, "token");
+			String expirationDate_string = JSONHelper.getValue(json, "expirationDate");
+			Date expirationDate = new Date();
+			try {
+				expirationDate = new SimpleDateFormat(getString(R.string.time_format), Locale.ENGLISH).parse(expirationDate_string);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+				findViewById(R.id.button_login).setEnabled(true);
+			}
+			
+			bus.setToken(token);
+			bus.setExpirationDate(expirationDate);
+			bus.setLoggedOut(false);
+			bus.saveSharedPrefs();
+			
+		} else {
+			bus.setLoggedOut(true);
+			Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
+			Intent intent = new Intent(this, MainActivity.class);
+			intent.addFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME); // Clears the Main Activity
+			startActivity(intent);
+			finish();
 		}
 	}
 
