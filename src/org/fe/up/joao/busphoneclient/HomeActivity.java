@@ -89,7 +89,8 @@ public class HomeActivity extends Activity {
 		new ComService(
 				"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
 				HomeActivity.this, 
-				"getUserInfoDone");
+				"getUserInfoDone", 
+				true);
 		
 	}
 	
@@ -110,7 +111,8 @@ public class HomeActivity extends Activity {
 			new ComService(
 					"login/" + bus.getEmail() + "/" + bus.getPw(), 
 					HomeActivity.this, 
-					"loginDone");
+					"loginDone", 
+					true);
 		}
 		else {
 			Toast.makeText(getApplicationContext(), "Falha ao atualizar", Toast.LENGTH_LONG).show();

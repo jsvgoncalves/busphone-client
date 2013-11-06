@@ -32,11 +32,10 @@ public class BuyTicketsActivity  extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		
 		String url = "info";
 		if (Ticket.prices[0] == -1) {
-			new ComService(url, this, "getPricesHandler");
+			new ComService(url, this, "getPricesHandler", true);
 		} else {
 			updatePrices(Ticket.prices[0], Ticket.prices[1], Ticket.prices[2]);
 		}
@@ -137,7 +136,7 @@ public class BuyTicketsActivity  extends Activity {
 	public void buyTickets(View v){
 		// get 'users/:id/buy/:nt1/:nt2/:nt3/t/:token'
 		String url = String.format("users/%s/buy/%d/%d/%d/t/%s", User.getID(), t1_amount, t2_amount, t3_amount, User.getToken());
-		new ComService(url, this, "returnFromBuyingTicketsHanlder");
+		new ComService(url, this, "returnFromBuyingTicketsHanlder", true);
 	}
 	
 	/**

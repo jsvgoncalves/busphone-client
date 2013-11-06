@@ -127,7 +127,8 @@ public class MainActivity extends Activity {
 		new ComService(
 				"login/" + bus.getEmail() + "/" + bus.getPw(), 
 				MainActivity.this, 
-				"loginDone");
+				"loginDone", 
+				true);
 	}
 	
 	public void loginDone(String result) {
@@ -156,7 +157,8 @@ public class MainActivity extends Activity {
 			new ComService(
 					"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
 					MainActivity.this, 
-					"getUserInfoDone");
+					"getUserInfoDone", 
+					true);
 		} else {
 			Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
 			findViewById(R.id.button_login).setEnabled(true);

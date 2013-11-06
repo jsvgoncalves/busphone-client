@@ -17,20 +17,21 @@ public class ComService extends AsyncTask<String, String, String> {
 	ProgressDialog dialog;
 	String methodName;
 	Object object;
+	boolean showProgress;
 	
 	@Override
 	protected void onPreExecute(){}
 	
-	public ComService(String url, Object object, String methodName) {
-		dialog = new ProgressDialog((Context) object);
+	public ComService(String url, Object object, String methodName, boolean showProgress) {
+		
 		String full_url = serverURL + url;
 		this.methodName = methodName;
 		this.object = object;
 		this.execute(full_url);
 		//set message of the dialog
+		dialog = new ProgressDialog((Context) object);
         dialog.setMessage("Fetching data.");
         dialog.setCancelable(false);
-        //show dialog
         dialog.show();
         super.onPreExecute();
 	}
@@ -56,7 +57,3 @@ public class ComService extends AsyncTask<String, String, String> {
 		}
 	}
 }
-/**
- * Retrieves the user profile
- * and its tickets
- */
