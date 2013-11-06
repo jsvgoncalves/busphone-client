@@ -19,6 +19,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -38,6 +40,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity {
 
 	BusPhoneClient bus;
+	ProgressDialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +131,11 @@ public class MainActivity extends Activity {
 				"login/" + bus.getEmail() + "/" + bus.getPw(), 
 				MainActivity.this, 
 				"loginDone", 
-				true);
+				false); // Hide progress bar cuz we will set it manually
+		dialog = new ProgressDialog(this);
+        dialog.setMessage(getString(R.string.fetching_data));
+        dialog.setCancelable(false);
+        dialog.show();
 	}
 	
 	public void loginDone(String result) {
@@ -158,7 +165,7 @@ public class MainActivity extends Activity {
 					"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
 					MainActivity.this, 
 					"getUserInfoDone", 
-					true);
+					false); // A progress dialog is already set at this point
 		} else {
 			Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
 			findViewById(R.id.button_login).setEnabled(true);
@@ -167,6 +174,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void getUserInfoDone(String result) {
+		dialog.dismiss();
 		JSONObject json = JSONHelper.string2JSON(result);
 		String status = JSONHelper.getValue(json, "status");
 		if(status.equals("0")) {

@@ -4,6 +4,7 @@ package org.fe.up.joao.busphoneclient.helper;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.fe.up.joao.busphoneclient.R;
 import org.json.JSONObject;
 
 import android.app.ProgressDialog;
@@ -28,11 +29,14 @@ public class ComService extends AsyncTask<String, String, String> {
 		this.methodName = methodName;
 		this.object = object;
 		this.execute(full_url);
+		this.showProgress = showProgress;
 		//set message of the dialog
-		dialog = new ProgressDialog((Context) object);
-        dialog.setMessage("Fetching data.");
-        dialog.setCancelable(false);
-        dialog.show();
+		if (showProgress) {
+			dialog = new ProgressDialog((Context) object);
+	        dialog.setMessage(((Context) object).getString(R.string.fetching_data));
+	        dialog.setCancelable(false);
+	        dialog.show();
+		}
         super.onPreExecute();
 	}
 
@@ -47,7 +51,9 @@ public class ComService extends AsyncTask<String, String, String> {
 //		Log.v("mylog", "result " + result);
 		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
-		dialog.dismiss();
+		if (showProgress) {
+			dialog.dismiss();
+		}
 		try {
 			Method method = object.getClass().getMethod(methodName, String.class);
 			method.invoke(object, result);
