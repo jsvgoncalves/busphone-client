@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.TextView;
@@ -32,7 +34,7 @@ public class BuyTicketsActivity  extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		getActionBar().setDisplayHomeAsUpEnabled(true);
 		String url = "info";
 		if (Ticket.prices[0] == -1) {
 			new ComService(url, this, "getPricesHandler", true);
@@ -153,6 +155,19 @@ public class BuyTicketsActivity  extends Activity {
 	public void returnFromBuyingTicketsHanlder(String jsonString) {
 		Log.v("MyLog", "Tickets buy result: " + jsonString);
 		this.finish();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		// Respond to the action bar's Up/Home button
+		case android.R.id.home:
+			/*NavUtils.navigateUpFromSameTask(this);*/
+			this.finish();
+			return true;
+	
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	
