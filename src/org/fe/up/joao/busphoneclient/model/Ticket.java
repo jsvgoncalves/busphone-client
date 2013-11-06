@@ -7,6 +7,7 @@ public class Ticket {
     public String uuid = "Undefined";
     public String created_at = "Undefined";
     public String updated_at = "Undefined";
+    public static Double[] prices = {-1.0,-1.0,-1.0};
     
     public Ticket(String... params){
     	if (params.length != 5) {

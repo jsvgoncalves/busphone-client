@@ -18,8 +18,6 @@ import org.json.JSONObject;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
-import android.app.ActionBar;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -186,6 +184,15 @@ public class HomeActivity extends Activity {
 			intent.putExtra("ticket_type", type);
 			startActivity(intent);
 		}
+	}
+	
+	
+	/**
+	 * Handler for the buy tickets button
+	 */
+	public void buyTicketsAction(View v) {
+		Intent intent = new Intent(this, BuyTicketsActivity.class);
+		startActivity(intent);
 	}
 	
 	

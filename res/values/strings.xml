@@ -8,7 +8,11 @@
     <string name="logout">Sair</string>
     <string name="cancel">Cancelar</string>
     <string name="refresh">Atualizar</string>
-    
+
+    <!-- Buy tickets -->
+    <string name="euros"> €</string>
+    <string name="total_price">Preço Total</string>
+    <string name="buy">Comprar</string>
     
     <string name="button_buy_tickets">Comprar Bilhetes</string>
     <string name="button_charge_acc">Carregar Conta</string>
