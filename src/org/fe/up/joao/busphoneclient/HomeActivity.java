@@ -58,6 +58,8 @@ public class HomeActivity extends Activity {
 
 		// If the user set the app to auto-update.
 		if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_DATAUSAGE_AUTOUPDATE,  true)){
+			// TODO Check if the user pref of mobile usage is set
+			// and if the client is connect via mobile data
 			refreshData();
 		}
 		
