@@ -7,6 +7,9 @@ import android.view.MenuItem;
 public class SettingsActivity extends Activity {
 	
 	public final static String KEY_PREF_DATAUSAGE_MOBILEDATA = "pref_datausage_mobiledata";
+	public final static String KEY_PREF_ALARM_ENABLED = "pref_alarm_enabled";
+	public final static String KEY_PREF_ALARM_SOUND = "pref_alarm_sound";
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,5 +30,7 @@ public class SettingsActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	
 
 }

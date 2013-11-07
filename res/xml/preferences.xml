@@ -24,14 +24,14 @@
 	        android:title="@string/pref_alarm_expirering_enabled"
 	        android:summary="@string/pref_alarm_expirering_enabled_summ"
 	        android:defaultValue="true"
-	        android:enabled="false" />
+	        android:enabled="true" />
 		<RingtonePreference
-			android:key="pref_alarm"
+			android:key="pref_alarm_sound"
 			android:title="@string/pref_alarm_expire_ring"
 			android:ringtoneType="notification"
 			android:showDefault="false"
 			android:showSilent="false"
-			android:enabled="false" />
+			android:dependency="pref_alarm_enabled" />
 		<!-- <Preference android:title="@string/logout" >
 		    <intent android:action="android.intent.category.HOME"/>
 		</Preference> -->
