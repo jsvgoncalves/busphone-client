@@ -167,6 +167,7 @@ public class MainActivity extends Activity {
 					"getUserInfoDone", 
 					false); // A progress dialog is already set at this point
 		} else {
+			dialog.dismiss();
 			Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();
 			findViewById(R.id.button_login).setEnabled(true);
 			findViewById(R.id.button_register).setEnabled(true);
