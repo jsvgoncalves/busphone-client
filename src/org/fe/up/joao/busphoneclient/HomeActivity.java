@@ -79,11 +79,19 @@ public class HomeActivity extends Activity {
 	            refreshData();
 	        	Log.v("mylog", "refreshing");
 	            return true;
+	        case R.id.action_settings:
+	        	showSettings();
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
 	
+	private void showSettings() {
+		Intent intent = new Intent(this, SettingsActivity.class);
+		startActivity(intent);
+	}
+
 	private void refreshData() {
 		// Everything is fine so load the user info
 		new ComService(

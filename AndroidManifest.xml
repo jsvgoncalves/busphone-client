@@ -60,6 +60,17 @@
     		android:screenOrientation="portrait"
             android:theme="@style/NoTitle">
         </activity>
+        <activity
+            android:name="org.fe.up.joao.busphoneclient.SettingsActivity"
+            android:label="@string/action_settings"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait"
+    		android:parentActivityName="org.fe.up.joao.busphoneclient.HomeActivity" >
+       		<!-- Parent activity meta-data to support 4.0 and lower -->
+       		<meta-data
+	            android:name="android.support.PARENT_ACTIVITY"
+	            android:value="org.fe.up.joao.busphoneclient.HomeActivity" />>
+        </activity>
     </application>
 
 </manifest>

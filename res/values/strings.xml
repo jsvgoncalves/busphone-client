@@ -3,7 +3,6 @@
 
     <!-- Generic  -->
     <string name="app_name">BusPhone</string>
-    <string name="action_settings">Definições</string>
     <string name="hello_world">Hello world!</string>
     <string name="logout">Sair</string>
     <string name="cancel">Cancelar</string>
@@ -39,7 +38,7 @@
     <string name="no_tickets_for_you">Bilhetes esgotados.</string>
     
     
-    <!--  For user forms -->
+    <!-- For user forms -->
     <string name="form_name">Nome</string>
     <string name="form_pw">Password</string>
     <string name="form_pw_repeat">Repetir Password</string>
@@ -56,6 +55,17 @@
     
     
     
-    
+    <!-- For settings -->
+   <string name="action_settings">Definições</string>
+   <string name="pref_conectivity">Conectividade</string>
+   <string name="pref_datausage_mobiledata">Utilizar dados móveis</string>
+   <string name="pref_datausage_mobiledata_summ">Utilizar dados móveis para atualizar a aplicação</string>
+   <string name="pref_datausage_autoupdate">Atualizar ao abrir</string>
+   <string name="pref_datausage_autoupdate_summ">Atualizar os dados cada vez que a aplicação é iniciada</string>
+   
+   <string name="pref_alarm">Notificações</string>
+   <string name="pref_alarm_expirering_enabled">Notificação sonora</string>
+   <string name="pref_alarm_expirering_enabled_summ">Ativar notificações sonoras quando bilhete expirar</string>
+   <string name="pref_alarm_expire_ring">Selecionar toque</string>
 
 </resources>
