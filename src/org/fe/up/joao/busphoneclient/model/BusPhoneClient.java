@@ -10,6 +10,8 @@ import org.fe.up.joao.busphoneclient.R;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.preference.PreferenceManager;
 
 public class BusPhoneClient extends Application {
 	private static BusPhoneClient instance;
@@ -109,7 +111,8 @@ public class BusPhoneClient extends Application {
 	 * @return boolean
 	 */
 	private boolean checkSharedPrefs() {
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+//		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		
 		String userid = settings.getString("userid", "notset");
 		String name = settings.getString("name", "notset");
@@ -146,7 +149,8 @@ public class BusPhoneClient extends Application {
 	public void saveSharedPrefs() { 
 		// We need an Editor object to make preference changes.
 		// All objects are from android.context.Context
-		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+//		SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
 		SharedPreferences.Editor editor = settings.edit();
 		
 		editor.putString("userid", user_id);
@@ -169,6 +173,13 @@ public class BusPhoneClient extends Application {
 
 	public boolean isLoggedOut() {
 		return loggedOut;
+	}
+	
+	public static void clearPreferences(Context context) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+		Editor defaultPrefsPut = settings.edit();
+		defaultPrefsPut.clear();
+		defaultPrefsPut.commit();
 	}
 
 }

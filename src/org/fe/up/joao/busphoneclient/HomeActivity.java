@@ -20,8 +20,10 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,6 +54,12 @@ public class HomeActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		bus = (BusPhoneClient) getApplicationContext();
 		setContentView(R.layout.activity_home);
+		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+		// If the user set the app to auto-update.
+		if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_DATAUSAGE_MOBILEDATA,  true)){
+			refreshData();
+		}
 		
 		User.fetchTicketsFromDB(this);
 		updateUsernameDisplay();

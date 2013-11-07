@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 public class SettingsActivity extends Activity {
+	
+	public final static String KEY_PREF_DATAUSAGE_MOBILEDATA = "pref_datausage_mobiledata";
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
