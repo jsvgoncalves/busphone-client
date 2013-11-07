@@ -6,6 +6,7 @@ import android.view.MenuItem;
 
 public class SettingsActivity extends Activity {
 	
+	public final static String KEY_PREF_DATAUSAGE_AUTOUPDATE = "pref_datausage_autoupdate";
 	public final static String KEY_PREF_DATAUSAGE_MOBILEDATA = "pref_datausage_mobiledata";
 	public final static String KEY_PREF_ALARM_ENABLED = "pref_alarm_enabled";
 	public final static String KEY_PREF_ALARM_SOUND = "pref_alarm_sound";

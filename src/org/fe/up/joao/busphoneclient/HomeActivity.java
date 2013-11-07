@@ -57,7 +57,7 @@ public class HomeActivity extends Activity {
 		SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
 		// If the user set the app to auto-update.
-		if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_DATAUSAGE_MOBILEDATA,  true)){
+		if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_DATAUSAGE_AUTOUPDATE,  true)){
 			refreshData();
 		}
 		

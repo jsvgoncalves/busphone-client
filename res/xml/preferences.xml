@@ -8,13 +8,13 @@
 	        android:title="@string/pref_datausage_mobiledata"
 	        android:summary="@string/pref_datausage_mobiledata_summ"
 	        android:defaultValue="true"
-	        android:enabled="true" />
+	        android:enabled="false" />
 	    <CheckBoxPreference
 	        android:key="pref_datausage_autoupdate"
 	        android:title="@string/pref_datausage_autoupdate"
 	        android:summary="@string/pref_datausage_autoupdate_summ"
 	        android:defaultValue="true"
-	        android:enabled="false" />
+	        android:enabled="true" />
 	</PreferenceCategory>
 	<PreferenceCategory 
         android:title="@string/pref_alarm"
