@@ -60,6 +60,7 @@ public class HomeActivity extends Activity {
 		if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_DATAUSAGE_AUTOUPDATE,  true)){
 			// TODO Check if the user pref of mobile usage is set
 			// and if the client is connect via mobile data
+			//if(sharedPref.getBoolean(SettingsActivity.KEY_PREF_DATAUSAGE_MOBILEDATA,  true) && on3g()) {
 			refreshData();
 		}
 		
