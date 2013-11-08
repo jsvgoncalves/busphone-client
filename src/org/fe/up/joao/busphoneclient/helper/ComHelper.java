@@ -64,7 +64,7 @@ import java.util.List;
 public class ComHelper{
 	
 //	public static final String JSON_EXTENSION = ".json";
-	public static String serverURL = "http://busphone-service.herokuapp.com/";
+	//public static String serverURL = "http://busphone-service.herokuapp.com/";
 	
 
 

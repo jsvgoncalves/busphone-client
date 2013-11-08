@@ -106,7 +106,7 @@ public class HomeActivity extends Activity {
 	private void refreshData() {
 		// Everything is fine so load the user info
 		new ComService(
-				"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
+				"users/" + bus.getUserID() + "/t/" + bus.getToken(), 
 				HomeActivity.this, 
 				"getUserInfoDone", 
 				true);
@@ -213,6 +213,14 @@ public class HomeActivity extends Activity {
 	 */
 	public void buyTicketsAction(View v) {
 		Intent intent = new Intent(this, BuyTicketsActivity.class);
+		startActivity(intent);
+	}
+	
+	/**
+	 * Handler for the history button
+	 */
+	public void historyAction(View v) {
+		Intent intent = new Intent(this, HistoryActivity.class);
 		startActivity(intent);
 	}
 	

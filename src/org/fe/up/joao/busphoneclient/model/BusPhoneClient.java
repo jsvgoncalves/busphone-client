@@ -57,7 +57,7 @@ public class BusPhoneClient extends Application {
 		this.name = name;
 	}
 
-	public String getUser_id() {
+	public String getUserID() {
 		return user_id;
 	}
 

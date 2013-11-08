@@ -14,7 +14,7 @@ import android.util.Log;
 
 public class ComService extends AsyncTask<String, String, String> {
 	
-	public static String serverURL = "http://busphone-service.herokuapp.com/";
+	public static String serverURL = "http://192.168.108.45:3000/";
 	ProgressDialog dialog;
 	String methodName;
 	Object object;

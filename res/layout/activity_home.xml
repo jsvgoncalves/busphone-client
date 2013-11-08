@@ -73,6 +73,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:maxWidth="400dp"
+                android:onClick="historyAction"
                 android:text="@string/button_trip_history" />
 
             <TextView

@@ -31,11 +31,14 @@
     
     <string name="title">Título</string>
     <string name="available">Disponíveis</string>
+    
+    <string name="history">Histórico de Viagens</string>
         
     
     <!-- For toasts -->
     <string name="loginexception">Por favor tente novamente.</string>
     <string name="no_tickets_for_you">Bilhetes esgotados.</string>
+    <string name="no_tickets_history">Sem histórico de viagens</string>
     
     
     <!-- For user forms -->

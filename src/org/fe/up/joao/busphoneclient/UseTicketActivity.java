@@ -51,7 +51,7 @@ public class UseTicketActivity  extends Activity {
 			ticket_type = extras.getString("ticket_type");
 		}
 		
-		String codeMessage = ((BusPhoneClient) getApplicationContext()).getUser_id()  + ";";
+		String codeMessage = ((BusPhoneClient) getApplicationContext()).getUserID()  + ";";
 		// Log.v("mylog", "Ticket type is " + ticket_type);
 		
 		if(ticket_type.equals("T1")) {

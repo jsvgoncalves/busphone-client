@@ -9,6 +9,8 @@ public class Ticket {
     public String updated_at = "Undefined";
     public static Double[] prices = {-1.0,-1.0,-1.0};
     
+    public String dateUsed = "Undefined";
+    
     public Ticket(String... params){
     	if (params.length != 5) {
 			return;
@@ -26,6 +28,13 @@ public class Ticket {
 		this.uuid = uuid;
 		this.created_at = created_at;
 		this.updated_at = updated_at;
+	}
+	
+	public Ticket(int id, int ticket_type, String uuid, String dateUsed) {
+		this.id = id;
+		this.ticket_type = ticket_type;
+		this.uuid = uuid;
+		this.dateUsed = dateUsed;
 	}
     
 }

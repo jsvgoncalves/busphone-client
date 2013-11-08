@@ -162,7 +162,7 @@ public class MainActivity extends Activity {
 			
 			// Everything is fine so load the user info
 			new ComService(
-					"users/" + bus.getUser_id() + "/t/" + bus.getToken(), 
+					"users/" + bus.getUserID() + "/t/" + bus.getToken(), 
 					MainActivity.this, 
 					"getUserInfoDone", 
 					false); // A progress dialog is already set at this point

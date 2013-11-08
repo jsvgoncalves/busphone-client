@@ -61,6 +61,12 @@
             android:theme="@style/NoTitle">
         </activity>
         <activity
+            android:name="org.fe.up.joao.busphoneclient.HistoryActivity"
+            android:label="@string/app_name"
+            android:configChanges="orientation"
+    		android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="org.fe.up.joao.busphoneclient.SettingsActivity"
             android:label="@string/action_settings"
             android:configChanges="orientation"
