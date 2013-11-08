@@ -152,8 +152,12 @@ public class BuyTicketsActivity  extends Activity {
 	/**
 	 * The returnFromBuyingTicketsHanlder hanlder
 	 */
-	public void returnFromBuyingTicketsHanlder(String jsonString) {
-		Log.v("MyLog", "Tickets buy result: " + jsonString);
+	public void returnFromBuyingTicketsHanlder(String result) {
+		Log.v("MyLog", "Tickets buy result: " + result);
+		// Parse the tickets
+//		JSONObject json = JSONHelper.string2JSON(result);
+//		User.parseTickets(json);
+//		User.updateTicketsDB(this);
 		this.finish();
 	}
 	

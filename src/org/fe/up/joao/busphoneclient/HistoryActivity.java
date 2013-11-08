@@ -52,28 +52,31 @@ public class HistoryActivity extends Activity {
 	public void initList(String jsonString) {
 		try {
 			Log.v("MyLog", "JSON: " + jsonString);
+			
 			JSONArray json = new JSONArray(jsonString);
 			usedTickets = new ArrayList<Map<String,String>>();
+			
 			for (int i = 0; i < json.length(); i++) {
 				JSONObject ticketJSON = json.getJSONObject(i);
-				// String id = JSONHelper.getValue(ticketJSON, "id");
+				
 				String type = JSONHelper.getValue(ticketJSON, "ticket_type");
-				//String uuid = JSONHelper.getValue(ticketJSON, "uuid");
+				
 				String dateUsed = JSONHelper.getValue(ticketJSON, "date_used");
+				Log.e("mylog", "buuuuuhh");
 				// new Ticket(id,type,uuid, dateUsed);
 				HashMap<String, String> ticket = new HashMap<String, String>();
 				ticket.put("first-line", "T" + type);
 				ticket.put("second-line", dateUsed);
 				usedTickets.add(ticket);
 			}
-			
+			Log.e("mylog", usedTickets.get(0).get("second-line"));
 			// We get the ListView component from the layout
-		    ListView lv = (ListView) findViewById(R.id.history_list_view);
-		    Log.v("MyLog", "Creating ticket list.");
-		    simpleAdpt = new SimpleAdapter(this, usedTickets, android.R.layout.simple_list_item_2,
-		    		new String[] {"planet", "description"}, new int[] {android.R.id.text1,android.R.id.text2});
-
-		    lv.setAdapter(simpleAdpt);
+			ListView lv = (ListView) findViewById(R.id.history_list_view);
+			Log.v("MyLog", "Creating ticket list.");
+			simpleAdpt = new SimpleAdapter(this, usedTickets, android.R.layout.simple_list_item_2,
+					new String[] {"first-line", "second-line"}, new int[] {android.R.id.text1,android.R.id.text2});
+			
+			lv.setAdapter(simpleAdpt);
 			
 		} catch (JSONException e) {
 			Toast.makeText(this, R.string.no_tickets_history, Toast.LENGTH_SHORT).show();
