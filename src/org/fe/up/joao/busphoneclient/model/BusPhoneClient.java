@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class BusPhoneClient extends Application {
 	private static BusPhoneClient instance;
@@ -31,6 +32,7 @@ public class BusPhoneClient extends Application {
 
 	@Override
 	public void onCreate() {
+		Log.v("mylog", "buh");
 		super.onCreate();
 		instance = this;
 		

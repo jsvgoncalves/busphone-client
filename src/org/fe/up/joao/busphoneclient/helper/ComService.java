@@ -24,7 +24,7 @@ public class ComService extends AsyncTask<String, String, String> {
 	protected void onPreExecute(){}
 	
 	public ComService(String url, Object object, String methodName, boolean showProgress) {
-		
+		Log.e("mylog", url );
 		String full_url = serverURL + url;
 		this.methodName = methodName;
 		this.object = object;
@@ -48,7 +48,7 @@ public class ComService extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPostExecute (String result){
 //		System.out.println(result);
-//		Log.v("mylog", "result " + result);
+		Log.e("mylog", "result " + result);
 		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
 		if (showProgress) {

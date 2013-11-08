@@ -36,9 +36,9 @@ public class HistoryActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_history);
-		bus = new BusPhoneClient();
+		bus = (BusPhoneClient) getApplication();
 		
-		String url = String.format("users/%d/history/t/%s", bus.getUserID(), bus.getToken());
+		String url = String.format("users/%s/history/t/%s", bus.getUserID(), bus.getToken());
 		Log.v("MyLog", "Getting used tickets...");
 		new ComService(url, this, "initList", false);
 	}

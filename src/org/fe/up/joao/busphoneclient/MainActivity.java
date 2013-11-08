@@ -44,8 +44,9 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.v("mylog", "FODASSE");
 		super.onCreate(savedInstanceState);
-		bus = (BusPhoneClient) getApplicationContext();
+		bus = (BusPhoneClient) getApplication();
 		
 		// Check for proper sharePreferences 
 		if(!bus.hasLoadedPrefs() || bus.isLoggedOut()) {
