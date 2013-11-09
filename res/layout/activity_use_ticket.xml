@@ -32,7 +32,7 @@
 	                style="android:buttonBarStyle"
 	                android:layout_width="85dp"
 	                android:layout_height="85dp"
-	                android:text="@string/t1"
+                	android:background="@drawable/button_ticket1"
 	                android:onClick="buttonClicked" />
 	
 	            <Button
@@ -40,7 +40,7 @@
 	                style="android:buttonBarStyle"
 	                android:layout_width="85dp"
 	                android:layout_height="85dp"
-	                android:text="@string/t2"
+                	android:background="@drawable/button_ticket2"
 	                android:onClick="buttonClicked" />
 	
 	            <Button
@@ -48,7 +48,7 @@
 	                style="android:buttonBarStyle"
 	                android:layout_width="85dp"
 	                android:layout_height="85dp"
-	                android:text="@string/t3"
+	                android:background="@drawable/button_ticket3"
 	                android:onClick="buttonClicked" />
 	        </LinearLayout> <!-- end ticketsButtonGroup -->
 	

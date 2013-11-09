@@ -1,106 +1,105 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical|center_horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.fe.up.joao.busphoneclient.HomeActivity" >
 
-    <ScrollView
-        android:id="@+id/scrollView1"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin" >
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/using_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="@string/greeting"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
-            android:id="@+id/linearLayout1"
-            android:layout_width="fill_parent"
+            android:id="@+id/ticketsButtonGroup"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/using_ticket"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="@android:string/unknownName"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <LinearLayout
-                android:id="@+id/ticketsButtonGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp" >
-
-                <Button
-                    android:id="@+id/t1button"
-                    style="android:buttonBarStyle"
-                    android:layout_width="85dp"
-                    android:layout_height="85dp"
-                    android:onClick="buttonClickedT1"
-                    android:text="@string/t1" />
-
-                <Button
-                    android:id="@+id/t2button"
-                    style="android:buttonBarStyle"
-                    android:layout_width="85dp"
-                    android:layout_height="85dp"
-                    android:onClick="buttonClickedT2"
-                    android:text="@string/t2" />
-
-                <Button
-                    android:id="@+id/t3button"
-                    style="android:buttonBarStyle"
-                    android:layout_width="85dp"
-                    android:layout_height="85dp"
-                    android:onClick="buttonClickedT3"
-                    android:text="@string/t3" />
-            </LinearLayout>
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
 
             <Button
-                android:id="@+id/button_buy_tickets"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:maxWidth="400dp"
-                android:onClick="buyTicketsAction"
-                android:text="@string/button_buy_tickets" />
+                android:id="@+id/t1button"
+                style="android:buttonBarStyle"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:background="@drawable/button_ticket1"
+                android:onClick="buttonClickedT1"
+                android:paddingTop="35dp"
+                android:textColor="#CCCCCC" />
 
             <Button
-                android:id="@+id/button_trip_history"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:maxWidth="400dp"
-                android:onClick="historyAction"
-                android:text="@string/button_trip_history" />
+                android:id="@+id/t2button"
+                style="android:buttonBarStyle"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:onClick="buttonClickedT2"
+                android:paddingTop="35dp"
+                android:background="@drawable/button_ticket2"
+                android:textColor="#CCCCCC" />
 
-            <TextView
-                android:id="@+id/last_trip_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:text="@string/last_trip" />
-
-            <TextView
-                android:id="@+id/lastTripBus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="@android:string/untitled"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
-
-            <ImageView
-                android:id="@+id/qrCode"
-                android:layout_width="300dp"
-                android:layout_height="300dp"
-                android:contentDescription="@string/qrcode_thumb"
-                android:gravity="center"
-                android:padding="0dp" />
+            <Button
+                android:id="@+id/t3button"
+                style="android:buttonBarStyle"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:onClick="buttonClickedT3"
+                android:paddingTop="35dp"
+                android:background="@drawable/button_ticket3"
+                android:textColor="#CCCCCC" />
         </LinearLayout>
-    </ScrollView>
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/button_buy_tickets"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:maxWidth="400dp"
+            android:onClick="buyTicketsAction"
+            android:text="@string/button_buy_tickets" />
+
+        <Button
+            android:id="@+id/button_trip_history"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:maxWidth="400dp"
+            android:onClick="historyAction"
+            android:text="@string/button_trip_history" />
+
+        <TextView
+            android:id="@+id/last_trip_label"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="@string/last_trip" />
+
+        <TextView
+            android:id="@+id/lastTripBus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="false"
+            android:gravity="center"
+            android:text="@android:string/untitled"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/qrCode"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:contentDescription="@string/qrcode_thumb"
+            android:gravity="center"
+            android:padding="0dp" />
+    </LinearLayout>
+
+</ScrollView>

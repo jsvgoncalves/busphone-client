@@ -7,7 +7,7 @@
     <string name="logout">Sair</string>
     <string name="cancel">Cancelar</string>
     <string name="refresh">Atualizar</string>
-    <string name="fetching_data">Fetching data.</string>
+    <string name="fetching_data">A obter dados</string>
 
     <!-- Buy tickets -->
     <string name="euros"> €</string>
@@ -25,9 +25,9 @@
     <string name="t2">T2</string>
     <string name="t3">T3</string>
     
-    <string name="greeting">Olá %s. Escolha um título:</string>
+    <string name="greeting">Escolha um título</string>
     <string name="qrcode_thumb">QRCode thumbnail</string>
-    <string name="how_to_use">Mantenha o ecrã a 10cm do leitor para validar.</string>
+    <string name="how_to_use">Mantenha o ecrã a 5cm do leitor para validar.</string>
     
     <string name="title">Título</string>
     <string name="available">Disponíveis</string>
@@ -46,8 +46,9 @@
     <string name="form_pw">Password</string>
     <string name="form_pw_repeat">Repetir Password</string>
     <string name="form_ccnum">Nº Cartão Crédito</string>
-    <string name="form_ccval">Validade do Cartão</string>
-    <string name="form_cccod">Código Validação</string>
+    <string name="form_cc_year">Ano</string>
+    <string name="form_cc_mês">Mês</string>
+    <string name="form_cccod">CVV</string>
     <string name="form_email">E-mail</string>
     <string name="login">Entrar</string>
     <string name="register">Nova Conta</string>

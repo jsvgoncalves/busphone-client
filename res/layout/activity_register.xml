@@ -11,6 +11,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.fe.up.joao.busphoneclient.RegisterActivity" >
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/form_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/form_name"
+        android:inputType="textPersonName" />
+
     <EditText
         android:id="@+id/form_email"
         android:layout_width="wrap_content"
@@ -37,6 +52,46 @@
         android:ems="10"
         android:hint="@string/form_pw_repeat"
         android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/form_ccnum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/form_ccnum"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="158dp"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/form_cc_mês"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="@string/form_cc_year"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="116dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/form_cccod"
+        android:inputType="number" />
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
