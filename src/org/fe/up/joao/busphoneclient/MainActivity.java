@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.v("mylog", "FODASSE");
+		Log.v("mylog", "Created Main Activity");
 		super.onCreate(savedInstanceState);
 		bus = (BusPhoneClient) getApplication();
 		
@@ -154,7 +154,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(this, "Bem vindo " + bus.getName(), Toast.LENGTH_LONG).show();
 			startHome();
 		} else {
-			Toast.makeText(getApplicationContext(), "Qualquer coisa correu mal :(", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Erro no servidor", Toast.LENGTH_LONG).show();
 		}
 	}
 

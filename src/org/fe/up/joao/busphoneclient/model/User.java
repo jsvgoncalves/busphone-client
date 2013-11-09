@@ -2,7 +2,6 @@ package org.fe.up.joao.busphoneclient.model;
 
 import java.util.ArrayList;
 
-import org.fe.up.joao.busphoneclient.R;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.TicketsDataSource;
 import org.json.JSONException;
@@ -10,7 +9,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 /**
  * Contains any values that are common
@@ -44,12 +42,12 @@ public class User {
 	/**
 	 * Database user ID
 	 */
-	private static int userID = 2; //FIXME: temporary debug
+	private static int userID = -1;
 	
 	public static ArrayList<Ticket> ticketsT1 = new ArrayList<Ticket>();
 	public static ArrayList<Ticket> ticketsT2 = new ArrayList<Ticket>();
 	public static ArrayList<Ticket> ticketsT3 = new ArrayList<Ticket>();
-	public static ArrayList<Ticket> ticketsHistory = new ArrayList<Ticket>();
+	public static ArrayList<UsedTicket> ticketsHistory = new ArrayList<UsedTicket>();
 	
 	public static String getName() {
 		return name;
@@ -111,10 +109,37 @@ public class User {
 		ArrayList<String> t2 = JSONHelper.getArray(json, "user", "tickets", "t2");
 		ArrayList<String> t3 = JSONHelper.getArray(json, "user", "tickets", "t3");
 		
+		ArrayList<String> tUsed = JSONHelper.getArray(json, "user", "tickets", "used");
+		
 		parseTicketArray(t1, ticketsT1);
 		parseTicketArray(t2, ticketsT2);
 		parseTicketArray(t3, ticketsT3);
-		
+		parseUsedTicketArray(tUsed, ticketsHistory);
+	}
+
+
+	private static void parseUsedTicketArray(ArrayList<String> tickets_str, ArrayList<UsedTicket> tickets) {
+		JSONObject json;
+		tickets.clear();
+		Log.v("mylog", "Parsing used tickets (" + tickets_str.size() + ")");
+		for (String ticketStr : tickets_str) {
+			json = JSONHelper.string2JSON(ticketStr);
+			try {
+				String dateUsed = JSONHelper.changeDateFormat(
+						"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "dd-MM-yyyy HH:mm", json.getString("date_used"));
+				UsedTicket t = new UsedTicket(json.getString("id"),
+						json.getString("ticket_type"),
+						json.getString("uuid"),
+						json.getString("created_at"),
+						json.getString("updated_at"),
+						dateUsed,
+						json.getString("bus_id"));
+				tickets.add(t);
+			} catch (JSONException e) {
+				System.err.println(e.toString());
+				System.err.println("Invalid JSON while retrieving tickets!");
+			}
+		}
 	}
 
 

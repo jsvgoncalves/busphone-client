@@ -1,16 +1,11 @@
 package org.fe.up.joao.busphoneclient;
 
-import org.fe.up.joao.busphoneclient.helper.Contents;
-import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.helper.QRCodeHelper;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.User;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -44,28 +39,28 @@ public class UseTicketActivity  extends Activity {
 			ticket_type = extras.getString("ticket_type");
 		}
 		
-		String codeMessage = ((BusPhoneClient) getApplicationContext()).getUserID()  + ";";
+		String qrData = ((BusPhoneClient) getApplicationContext()).getUserID()  + ";";
 		// Log.v("mylog", "Ticket type is " + ticket_type);
 		
 		if(ticket_type.equals("T1")) {
 			Button bt1 = (Button) findViewById(R.id.t1button);
 			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			codeMessage += User.ticketsT1.get(0).uuid;
+			qrData += User.ticketsT1.get(0).uuid;
 		} else if(ticket_type.equals("T2")) {
 			Button bt1 = (Button) findViewById(R.id.t2button);
 			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			codeMessage += User.ticketsT2.get(0).uuid;
+			qrData += User.ticketsT2.get(0).uuid;
 		} else if(ticket_type.equals("T3")) {
 			Button bt1 = (Button) findViewById(R.id.t3button);
 			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			codeMessage += User.ticketsT3.get(0).uuid;
+			qrData += User.ticketsT3.get(0).uuid;
 		}
 
-
-		updateQRCode(codeMessage);
+		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+		QRCodeHelper.updateQRCode(qrData, imageView);
 	}
 
 	public void buttonClicked(View view) {
@@ -88,38 +83,7 @@ public class UseTicketActivity  extends Activity {
 		startActivity(intent);
 	}
 
-	protected void updateQRCode(String qrMessage){
 
-		// ImageView to display the QR code in.  This should be defined in 
-		// your Activity's XML layout file
-		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
-
-		if (!User.ticketsHistory.isEmpty()) {
-			String qrData = User.ticketsHistory.get(0).uuid;
-			int qrCodeDimention = 500;
-			System.out.println("Ticket history is empty.");
-			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
-					Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-
-			try {
-				Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-				imageView.setImageBitmap(bitmap);
-			} catch (WriterException e) {
-				e.printStackTrace();
-			}
-		} else {
-			int qrCodeDimention = 500;
-			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrMessage, null,
-					Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-
-			try {
-				Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-				imageView.setImageBitmap(bitmap);
-			} catch (WriterException e) {
-				e.printStackTrace();
-			}
-		}
-	}
 	
 	public void cancelClicked(View v) {
 		onBackPressed();

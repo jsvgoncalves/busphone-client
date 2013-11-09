@@ -7,9 +7,7 @@ import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;

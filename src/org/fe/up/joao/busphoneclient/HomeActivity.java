@@ -7,21 +7,17 @@ import java.util.Date;
 import java.util.Locale;
 
 import org.fe.up.joao.busphoneclient.helper.ComService;
-import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
-import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
+import org.fe.up.joao.busphoneclient.helper.QRCodeHelper;
 import org.fe.up.joao.busphoneclient.helper.TicketsDataSource;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
 import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
 import org.json.JSONObject;
 
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.WriterException;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -30,8 +26,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 /**
@@ -68,7 +65,7 @@ public class HomeActivity extends Activity {
 		// updateUsernameDisplay(); //  I removed the name from header
 		updateTicketsDisplay();
 
-//		updateQRCode();	// TODO Update QR code
+		
 	}
 	
 	@Override
@@ -226,37 +223,37 @@ public class HomeActivity extends Activity {
 	
 	
 	
-	protected void updateQRCode(){
-		// ImageView to display the QR code in.  This should be defined in 
-		// your Activity's XML layout file
-		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
-	
-		if (!User.ticketsHistory.isEmpty()) {
-			String qrData = User.ticketsHistory.get(0).uuid;
-			int qrCodeDimention = 500;
-			System.out.println("Ticket history is empty.");
-			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
-			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-		
-			try {
-			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-			    imageView.setImageBitmap(bitmap);
-			} catch (WriterException e) {
-			    e.printStackTrace();
-			}
-		} else {
-			int qrCodeDimention = 500;
-			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder("bananas", null,
-			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-		
-			try {
-			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-			    imageView.setImageBitmap(bitmap);
-			} catch (WriterException e) {
-			    e.printStackTrace();
-			}
-		}
-	}
+//	protected void updateQRCode(){
+//		// ImageView to display the QR code in.  This should be defined in 
+//		// your Activity's XML layout file
+//		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+//	
+//		if (!User.ticketsHistory.isEmpty()) {
+//			String qrData = User.ticketsHistory.get(0).uuid;
+//			int qrCodeDimention = 500;
+//			System.out.println("Ticket history is empty.");
+//			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
+//			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
+//		
+//			try {
+//			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+//			    imageView.setImageBitmap(bitmap);
+//			} catch (WriterException e) {
+//			    e.printStackTrace();
+//			}
+//		} else {
+//			int qrCodeDimention = 500;
+//			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder("bananas", null,
+//			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
+//		
+//			try {
+//			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+//			    imageView.setImageBitmap(bitmap);
+//			} catch (WriterException e) {
+//			    e.printStackTrace();
+//			}
+//		}
+//	}
 	
 	
 //	public void updateUsernameDisplay() {
@@ -286,6 +283,19 @@ public class HomeActivity extends Activity {
 			buttonT3.setEnabled(false);
 		} else {
 			buttonT3.setEnabled(true);
+		}
+		
+		// Updates QRCode and last ticket info
+		if (User.ticketsHistory.isEmpty()) {
+			((LinearLayout) findViewById(R.id.last_used_ticket_layout)).setVisibility(View.GONE);
+		} else {
+			((LinearLayout) findViewById(R.id.last_used_ticket_layout)).setVisibility(View.VISIBLE);
+			String qrData = User.getID() + ";" + User.ticketsHistory.get(0).uuid;
+			ImageView imageView = (ImageView) findViewById(R.id.qrCode);
+			QRCodeHelper.updateQRCode(qrData, imageView);
+			
+			String ticketText = "T" + User.ticketsHistory.get(0).ticket_type + " - " + User.ticketsHistory.get(0).dateUsed;
+			((TextView) findViewById(R.id.lastTripBus)).setText(ticketText);
 		}
 	}
 
