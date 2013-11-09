@@ -1,6 +1,10 @@
 package org.fe.up.joao.busphoneclient.helper;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +66,25 @@ public class JSONHelper {
 			System.err.println("getArray: Invalid JSON array; " + path[i] + " not found.");
 			return new ArrayList<String>();
 		}
+	}
+	
+	
+	public static String changeDateFormat(String oldFormat, String newFormat, String dateString) {
+		try {
+			String newDateString;
+	
+			SimpleDateFormat sdf = new SimpleDateFormat(oldFormat, Locale.getDefault());
+			Date d;
+		
+			d = sdf.parse(dateString);
+			sdf.applyPattern(newFormat);
+			newDateString = sdf.format(d);
+			return newDateString;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "Undefined date";
 	}
 	
 }

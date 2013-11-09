@@ -61,7 +61,10 @@ public class HistoryActivity extends Activity {
 				
 				String type = JSONHelper.getValue(ticketJSON, "ticket_type");
 				
+				// 2013-11-09T00:00:00.000Z
 				String dateUsed = JSONHelper.getValue(ticketJSON, "date_used");
+				dateUsed = JSONHelper.changeDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", "dd-MM-yyyy HH:mm", dateUsed);
+				
 				Log.e("mylog", "buuuuuhh");
 				// new Ticket(id,type,uuid, dateUsed);
 				HashMap<String, String> ticket = new HashMap<String, String>();
