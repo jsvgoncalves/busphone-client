@@ -270,9 +270,23 @@ public class HomeActivity extends Activity {
 		Button buttonT3 = (Button) findViewById(R.id.t3button);
 		
 		buttonT1.setText("x" + User.ticketsT1.size());
+		if (User.ticketsT1.size() < 1) {
+			buttonT1.setEnabled(false);
+		} else {
+			buttonT1.setEnabled(true);
+		}
 		buttonT2.setText("x" + User.ticketsT2.size());
+		if (User.ticketsT2.size() < 1) {
+			buttonT2.setEnabled(false);
+		} else {
+			buttonT2.setEnabled(true);
+		}
 		buttonT3.setText("x" + User.ticketsT3.size());
-		
+		if (User.ticketsT3.size() < 1) {
+			buttonT3.setEnabled(false);
+		} else {
+			buttonT3.setEnabled(true);
+		}
 	}
 
 	public void logout(){
