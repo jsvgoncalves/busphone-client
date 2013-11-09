@@ -7,7 +7,10 @@
     <string name="logout">Sair</string>
     <string name="cancel">Cancelar</string>
     <string name="refresh">Atualizar</string>
+    
+    <!-- For dialogs -->
     <string name="fetching_data">A obter dados</string>
+    <string name="registring">A criar conta</string>
 
     <!-- Buy tickets -->
     <string name="euros"> €</string>
@@ -54,10 +57,7 @@
     <string name="register">Nova Conta</string>
     <string name="create">Criar</string>
     
-    
     <string name="validate">Validar</string>
-    
-    
     
     <!-- For settings -->
    <string name="action_settings">Definições</string>

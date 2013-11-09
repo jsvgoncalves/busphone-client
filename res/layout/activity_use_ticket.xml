@@ -1,90 +1,78 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
     android:paddingBottom="0dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0dp"
     tools:context="org.fe.up.joao.busphoneclient.HomeActivity" >
 
-	<ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" >
-	    <LinearLayout
-	        android:id="@+id/linearLayout1"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:gravity="center"
-	        android:orientation="vertical" >
-	
-	        <LinearLayout
-	            android:id="@+id/ticketsButtonGroup"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:paddingBottom="10dp"
-	            android:paddingTop="10dp"
-	            android:gravity="center" >
-	
-	            <Button
-	                android:id="@+id/t1button"
-	                style="android:buttonBarStyle"
-	                android:layout_width="85dp"
-	                android:layout_height="85dp"
-                	android:background="@drawable/button_ticket1"
-	                android:onClick="buttonClicked" />
-	
-	            <Button
-	                android:id="@+id/t2button"
-	                style="android:buttonBarStyle"
-	                android:layout_width="85dp"
-	                android:layout_height="85dp"
-                	android:background="@drawable/button_ticket2"
-	                android:onClick="buttonClicked" />
-	
-	            <Button
-	                android:id="@+id/t3button"
-	                style="android:buttonBarStyle"
-	                android:layout_width="85dp"
-	                android:layout_height="85dp"
-	                android:background="@drawable/button_ticket3"
-	                android:onClick="buttonClicked" />
-	        </LinearLayout> <!-- end ticketsButtonGroup -->
-	
-	
-	        <ImageView
-	            android:id="@+id/qrCode"
-	            android:layout_width="300dp"
-	            android:layout_height="300dp"
-	            android:padding="0dp"
-	            android:contentDescription="@string/qrcode_thumb"
-	            android:gravity="center" />
-	        <LinearLayout
-		        style="?android:attr/buttonBarStyle"
-		        android:layout_width="match_parent"
-		        android:layout_height="wrap_content" >        
-		
-		        <Button
-		            android:id="@+id/button_cancel"
-		            style="?android:attr/buttonBarButtonStyle"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="1"
-		            android:onClick="cancelClicked"
-		            android:text="@string/cancel" />
-		
-		        <Button
-		            android:id="@+id/button_usedticket"
-		            style="?android:attr/buttonBarButtonStyle"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_weight="1"
-		            android:onClick="validateClicked"
-		            android:text="@string/validate" />
-		
-		    </LinearLayout>
-    	</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ticketsButtonGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" >
 
-    </ScrollView>
-</RelativeLayout>
+        <Button
+            android:id="@+id/t1button"
+            style="android:buttonBarStyle"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:background="@drawable/button_ticket1"
+            android:onClick="buttonClicked" />
+
+        <Button
+            android:id="@+id/t2button"
+            style="android:buttonBarStyle"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:background="@drawable/button_ticket2"
+            android:onClick="buttonClicked" />
+
+        <Button
+            android:id="@+id/t3button"
+            style="android:buttonBarStyle"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            android:background="@drawable/button_ticket3"
+            android:onClick="buttonClicked" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/qrCode"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:contentDescription="@string/qrcode_thumb"
+        android:gravity="center"
+        android:padding="0dp" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/button_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="cancelClicked"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/button_usedticket"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="validateClicked"
+            android:text="@string/validate" />
+    </LinearLayout>
+
+</LinearLayout>

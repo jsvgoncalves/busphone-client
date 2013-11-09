@@ -1,28 +1,20 @@
 package org.fe.up.joao.busphoneclient;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
-import org.fe.up.joao.busphoneclient.helper.ComHelper;
 import org.fe.up.joao.busphoneclient.helper.ComService;
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
+import org.fe.up.joao.busphoneclient.helper.md5Helper;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
-import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -74,8 +66,8 @@ public class MainActivity extends Activity {
 		
 		if (!email.equals("") && !pw.equals("")) {
 			
-			bus.setEmail(hashMD5(email));
-			bus.setPw(hashMD5(pw));
+			bus.setEmail(md5Helper.hashMD5(email));
+			bus.setPw(md5Helper.hashMD5(pw));
 			doLogin();
 		} else {
 			v.setEnabled(true);
@@ -94,35 +86,7 @@ public class MainActivity extends Activity {
 //		finish();
 	}
 
-	/**
-	 * 
-	 * @param str
-	 * @return
-	 */
-	private String hashMD5(String str) {
-		byte[] bytesOfMessage;
-		byte[] hashed = null;
-		try {
-			
-			bytesOfMessage = str.getBytes("UTF-8");
-			MessageDigest md;
-			md = MessageDigest.getInstance("MD5");
-			hashed = md.digest(bytesOfMessage);
-			StringBuffer sb = new StringBuffer();
-	        for (int i = 0; i < hashed.length; i++) {
-	          sb.append(Integer.toString((hashed[i] & 0xff) + 0x100, 16).substring(1));
-	        }
-	        return sb.toString();
-	   
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "";
-	}
+
 
 	/**
 	 * Starts a new "service" (not android service) and provides the callback

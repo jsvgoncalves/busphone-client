@@ -1,12 +1,9 @@
 package org.fe.up.joao.busphoneclient.helper;
 
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import org.fe.up.joao.busphoneclient.R;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -23,7 +20,11 @@ public class ComService extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPreExecute(){}
 	
-	public ComService(String url, Object object, String methodName, boolean showProgress) {
+	public ComService(String url, Object object, String methodName, boolean showProgress){
+		this(url, object, methodName, showProgress, ((Context) object).getString(R.string.fetching_data));
+	}
+	
+	public ComService(String url, Object object, String methodName, boolean showProgress, String dialogMessage) {
 		Log.e("mylog", url );
 		String full_url = serverURL + url;
 		this.methodName = methodName;
@@ -33,7 +34,7 @@ public class ComService extends AsyncTask<String, String, String> {
 		//set message of the dialog
 		if (showProgress) {
 			dialog = new ProgressDialog((Context) object);
-	        dialog.setMessage(((Context) object).getString(R.string.fetching_data));
+	        dialog.setMessage(dialogMessage);
 	        dialog.setCancelable(false);
 	        dialog.show();
 		}
@@ -49,7 +50,7 @@ public class ComService extends AsyncTask<String, String, String> {
 	protected void onPostExecute (String result){
 //		System.out.println(result);
 		Log.e("mylog", "result " + result);
-		JSONObject json = JSONHelper.string2JSON(result);
+//		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
 		if (showProgress) {
 			dialog.dismiss();
