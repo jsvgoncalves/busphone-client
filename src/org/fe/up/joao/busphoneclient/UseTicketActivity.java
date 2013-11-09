@@ -1,11 +1,8 @@
 package org.fe.up.joao.busphoneclient;
 
-import java.util.ArrayList;
-
 import org.fe.up.joao.busphoneclient.helper.Contents;
 import org.fe.up.joao.busphoneclient.helper.QRCodeEncoder;
 import org.fe.up.joao.busphoneclient.model.BusPhoneClient;
-import org.fe.up.joao.busphoneclient.model.Ticket;
 import org.fe.up.joao.busphoneclient.model.User;
 
 import com.google.zxing.BarcodeFormat;
@@ -15,11 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -56,18 +49,17 @@ public class UseTicketActivity  extends Activity {
 		
 		if(ticket_type.equals("T1")) {
 			Button bt1 = (Button) findViewById(R.id.t1button);
-			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
-			ArrayList<Ticket> t = User.ticketsT1;
 			codeMessage += User.ticketsT1.get(0).uuid;
 		} else if(ticket_type.equals("T2")) {
 			Button bt1 = (Button) findViewById(R.id.t2button);
-			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
 			codeMessage += User.ticketsT2.get(0).uuid;
 		} else if(ticket_type.equals("T3")) {
 			Button bt1 = (Button) findViewById(R.id.t3button);
-			bt1.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
 			codeMessage += User.ticketsT3.get(0).uuid;
 		}

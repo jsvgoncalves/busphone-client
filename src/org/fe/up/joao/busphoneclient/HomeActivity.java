@@ -65,7 +65,7 @@ public class HomeActivity extends Activity {
 		}
 		
 		User.fetchTicketsFromDB(this);
-		updateUsernameDisplay();
+		// updateUsernameDisplay(); //  I removed the name from header
 		updateTicketsDisplay();
 
 //		updateQRCode();	// TODO Update QR code
@@ -259,19 +259,19 @@ public class HomeActivity extends Activity {
 	}
 	
 	
-	public void updateUsernameDisplay() {
-		TextView userName = (TextView) findViewById(R.id.using_ticket);
-		userName.setText(String.format( getString(R.string.greeting), bus.getName()));
-	}
+//	public void updateUsernameDisplay() {
+//		TextView userName = (TextView) findViewById(R.id.using_ticket);
+//		userName.setText(String.format( getString(R.string.greeting), bus.getName()));
+//	}
 	
 	public void updateTicketsDisplay() {
 		Button buttonT1 = (Button) findViewById(R.id.t1button);
 		Button buttonT2 = (Button) findViewById(R.id.t2button);
 		Button buttonT3 = (Button) findViewById(R.id.t3button);
 		
-		buttonT1.setText(getString(R.string.t1) + "\nx" + User.ticketsT1.size());
-		buttonT2.setText(getString(R.string.t2) + "\nx" + User.ticketsT2.size());
-		buttonT3.setText(getString(R.string.t3) + "\nx" + User.ticketsT3.size());
+		buttonT1.setText("x" + User.ticketsT1.size());
+		buttonT2.setText("x" + User.ticketsT2.size());
+		buttonT3.setText("x" + User.ticketsT3.size());
 		
 	}
 
