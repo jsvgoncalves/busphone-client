@@ -1,75 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Generic  -->
-    <string name="app_name">BusPhone</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="logout">Sair</string>
-    <string name="cancel">Cancelar</string>
-    <string name="refresh">Atualizar</string>
-    
-    <!-- For dialogs -->
-    <string name="fetching_data">A obter dados</string>
-    <string name="registring">A criar conta</string>
-
-    <!-- Buy tickets -->
-    <string name="euros"> €</string>
-    <string name="total_price">Preço Total</string>
-    <string name="buy">Comprar</string>
-    
-    <string name="button_buy_tickets">Comprar Bilhetes</string>
-    <string name="button_charge_acc">Carregar Conta</string>
-    <string name="button_trip_history">Histórico de Viagens</string>
-    
-    <string name="last_trip">Última viagem</string>
-    
-    <!-- http://stackoverflow.com/questions/10411699/concatenate-multiple-strings-in-xml -->
-    <string name="t1">T1</string>
-    <string name="t2">T2</string>
-    <string name="t3">T3</string>
-    
-    <string name="greeting">Escolha um título</string>
-    <string name="qrcode_thumb">QRCode thumbnail</string>
-    <string name="how_to_use">Mantenha o ecrã a 5cm do leitor para validar.</string>
-    
-    <string name="title">Título</string>
-    <string name="available">Disponíveis</string>
-    
-    <string name="history">Histórico de Viagens</string>
-        
-    
-    <!-- For toasts -->
-    <string name="loginexception">Por favor tente novamente.</string>
-    <string name="no_tickets_for_you">Bilhetes esgotados.</string>
-    <string name="no_tickets_history">Sem histórico de viagens</string>
-    
-    
-    <!-- For user forms -->
-    <string name="form_name">Nome</string>
-    <string name="form_pw">Password</string>
-    <string name="form_pw_repeat">Repetir Password</string>
-    <string name="form_ccnum">Nº Cartão Crédito</string>
-    <string name="form_cc_year">Ano</string>
-    <string name="form_cc_mês">Mês</string>
-    <string name="form_cccod">CVV</string>
-    <string name="form_email">E-mail</string>
-    <string name="login">Entrar</string>
-    <string name="register">Nova Conta</string>
-    <string name="create">Criar</string>
-    
-    <string name="validate">Validar</string>
-    
-    <!-- For settings -->
-   <string name="action_settings">Definições</string>
-   <string name="pref_conectivity">Conectividade</string>
-   <string name="pref_datausage_mobiledata">Utilizar dados móveis</string>
-   <string name="pref_datausage_mobiledata_summ">Utilizar dados móveis para atualizar a aplicação</string>
-   <string name="pref_datausage_autoupdate">Atualizar ao abrir</string>
-   <string name="pref_datausage_autoupdate_summ">Atualizar os dados cada vez que a aplicação é iniciada</string>
+	<!-- Generic  -->
+	<string name="app_name">BusPhone</string>
+	<string name="hello_world">Hello world!</string>
+	<string name="logout">Sair</string>
+	<string name="cancel">Cancelar</string>
+	<string name="refresh">Atualizar</string>
+	
+	<!-- For dialogs -->
+	<string name="fetching_data">A obter dados</string>
+	<string name="registring">A criar conta</string>
+	
+	<!-- Buy tickets -->
+	<string name="euros"> €</string>
+	<string name="total_price">Preço Total</string>
+	<string name="buy">Comprar</string>
+	
+	<string name="button_buy_tickets">Comprar Bilhetes</string>
+	<string name="button_charge_acc">Carregar Conta</string>
+	<string name="button_trip_history">Histórico de Viagens</string>
+	
+	<string name="last_trip">Última viagem</string>
+	
+	<!-- http://stackoverflow.com/questions/10411699/concatenate-multiple-strings-in-xml -->
+	<string name="t1">T1</string>
+	<string name="t2">T2</string>
+	<string name="t3">T3</string>
+	
+	<string name="greeting">Escolha um título</string>
+	<string name="qrcode_thumb">QRCode thumbnail</string>
+	<string name="how_to_use">Mantenha o ecrã a 5cm do leitor para validar.</string>
+	
+	<string name="title">Título</string>
+	<string name="available">Disponíveis</string>
+	
+	<string name="history">Histórico de Viagens</string>
+	    
+	
+	<!-- For toasts -->
+	<string name="loginexception">Por favor tente novamente.</string>
+	<string name="no_tickets_for_you">Bilhetes esgotados.</string>
+	<string name="no_tickets_history">Sem histórico de viagens</string>
+	
+	
+	<!-- For user forms -->
+	<string name="form_name">Nome</string>
+	<string name="form_pw">Password</string>
+	<string name="form_pw_repeat">Repetir Password</string>
+	<string name="form_ccnum">Nº Cartão Crédito</string>
+	<string name="form_cc_year">Ano</string>
+	<string name="form_cc_mês">Mês</string>
+	<string name="form_cccod">CVV</string>
+	<string name="form_email">E-mail</string>
+	<string name="login">Entrar</string>
+	<string name="register">Nova Conta</string>
+	<string name="create">Criar</string>
+	
+	<string name="validate">Validar</string>
+	
+	<!-- For settings -->
+	<string name="action_settings">Definições</string>
+	<string name="pref_conectivity">Conectividade</string>
+	<string name="pref_datausage_mobiledata">Utilizar dados móveis</string>
+	<string name="pref_datausage_mobiledata_summ">Utilizar dados móveis para atualizar a aplicação</string>
+	<string name="pref_datausage_autoupdate">Atualizar ao abrir</string>
+	<string name="pref_datausage_autoupdate_summ">Atualizar os dados cada vez que a aplicação é iniciada</string>
+	
+	<string name="pref_alarm">Notificações</string>
+	<string name="pref_alarm_expirering_enabled">Notificação sonora</string>
+	<string name="pref_alarm_expirering_enabled_summ">Ativar notificações sonoras quando bilhete expirar</string>
+	<string name="pref_alarm_expire_ring">Selecionar toque</string>
    
-   <string name="pref_alarm">Notificações</string>
-   <string name="pref_alarm_expirering_enabled">Notificação sonora</string>
-   <string name="pref_alarm_expirering_enabled_summ">Ativar notificações sonoras quando bilhete expirar</string>
-   <string name="pref_alarm_expire_ring">Selecionar toque</string>
+   <!-- For user profile  -->
+	<string name="profile">Perfil</string>
+	<string name="profile_general">Dados gerais</string>
+	<string name="profile_advanced">Dados técnicos</string>
+	
+	<string name="profile_name">Nome</string>
+	<string name="profile_email">E-mail</string>
+	<string name="profile_token">Token</string>
+	<string name="profile_lastUpdate">Último update</string>
+	<string name="profile_lastLogin">Último login</string>
+	<string name="profile_tokenExpires">Login expira</string>
+	
 
 </resources>

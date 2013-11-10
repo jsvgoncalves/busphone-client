@@ -20,6 +20,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.ContactsContract.Profile;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -71,31 +72,39 @@ public class HomeActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.main, menu);
-	    return true;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main, menu);
+		return true;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	        case R.id.action_logout:
-	            logout();
-	        	Log.v("mylog", "logging out");
-	            return true;
-	        case R.id.action_refresh:
-	            refreshData();
-	        	Log.v("mylog", "refreshing");
-	            return true;
-	        case R.id.action_settings:
-	        	showSettings();
-	        	return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+		// Handle item selection
+		switch (item.getItemId()) {
+		case R.id.action_logout:
+			logout();
+			Log.v("mylog", "logging out");
+			return true;
+		case R.id.action_refresh:
+			refreshData();
+			Log.v("mylog", "refreshing");
+			return true;
+		case R.id.action_settings:
+			showSettings();
+			return true;
+		case R.id.action_profile:
+			showProfile();
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 	
+	private void showProfile() {
+		Intent intent = new Intent(this, UserProfileActivity.class);
+		startActivity(intent);
+	}
+
 	private void showSettings() {
 		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
@@ -122,6 +131,7 @@ public class HomeActivity extends Activity {
 			User.parseTickets(json);
 			updateTicketsDisplay();
 			User.updateTicketsDB(this);
+			bus.saveLastUpdate(); // Updates lastUpdated field.
 			Toast.makeText(getApplicationContext(), "Atualizado", Toast.LENGTH_LONG).show();
 		} else if(status.equals("2") || status.equals("1")) {
 			bus.setExpirationDate(new Date());
@@ -160,7 +170,7 @@ public class HomeActivity extends Activity {
 			bus.setExpirationDate(expirationDate);
 			bus.setLoggedOut(false);
 			bus.saveSharedPrefs();
-			
+			refreshData(); // Fetch the data again. TODO create a flag to stop endless loops.
 		} else {
 			bus.setLoggedOut(true);
 			Toast.makeText(this, getString(R.string.loginexception), Toast.LENGTH_LONG).show();

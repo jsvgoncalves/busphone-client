@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
 		String pw = ((EditText) findViewById(R.id.form_pw)).getText().toString();
 		
 		if (!email.equals("") && !pw.equals("")) {
-			
+			bus.setRealEmail(email);
 			bus.setEmail(md5Helper.hashMD5(email));
 			bus.setPw(md5Helper.hashMD5(pw));
 			doLogin();
@@ -98,9 +98,9 @@ public class MainActivity extends Activity {
 				"loginDone", 
 				false); // Hide progress bar cuz we will set it manually
 		dialog = new ProgressDialog(this);
-        dialog.setMessage(getString(R.string.fetching_data));
-        dialog.setCancelable(false);
-        dialog.show();
+		dialog.setMessage(getString(R.string.fetching_data));
+		dialog.setCancelable(false);
+		dialog.show();
 	}
 	
 	public void loginDone(String result) {
@@ -150,8 +150,10 @@ public class MainActivity extends Activity {
 			// Parse the tickets
 			User.parseTickets(json);
 			User.updateTicketsDB(this);
+			bus.saveLastUpdate(); // Updates lastUpdated field.
 			
 			Toast.makeText(this, "Bem vindo " + bus.getName(), Toast.LENGTH_LONG).show();
+			
 			startHome();
 		} else {
 			Toast.makeText(getApplicationContext(), "Erro no servidor", Toast.LENGTH_LONG).show();

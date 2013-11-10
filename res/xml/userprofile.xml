@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- 
+	<string name="profile_general">Dados gerais</string>
+	<string name="profile_advanced">Dados técnicos</string>
+	<string name="profile_name">Nome</string>
+	<string name="profile_token">Token</string>
+	<string name="profile_lastUpdate">Último update</string>
+	<string name="profile_lastLogin">Último login</string>
+	<string name="profile_tokenExpires">Login expira</string>
+	 -->
+	 <PreferenceCategory 
+		android:title="@string/profile_general">
+		<EditTextPreference
+			android:key="pref_profile_name"
+			android:title="@string/profile_name"
+			android:enabled="false" />
+		<EditTextPreference
+			android:key="pref_profile_email"
+			android:title="@string/profile_email"
+			android:enabled="false" />
+		
+	</PreferenceCategory>
+	<PreferenceCategory 
+		android:title="@string/profile_advanced">
+		<EditTextPreference
+		    android:key="pref_profile_lastUpdate"
+			android:title="@string/profile_lastUpdate"
+			android:enabled="false" />
+		<EditTextPreference
+		    android:key="pref_profile_expires"
+			android:title="@string/profile_tokenExpires"
+			android:enabled="false" />
+	</PreferenceCategory>
+</PreferenceScreen>

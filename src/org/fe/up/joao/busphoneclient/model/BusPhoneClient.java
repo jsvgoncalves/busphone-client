@@ -22,6 +22,7 @@ public class BusPhoneClient extends Application {
 	private String token;
 	private String name;
 	private String email;
+	private String realEmail;
 	private String pw;
 	private Date expirationDate;
 	
@@ -29,6 +30,7 @@ public class BusPhoneClient extends Application {
 	
 	private String PREFS_NAME = "login";
 	private boolean loadedPrefs = false;
+	private String lastUpdate;
 
 	@Override
 	public void onCreate() {
@@ -119,8 +121,10 @@ public class BusPhoneClient extends Application {
 		String userid = settings.getString("userid", "notset");
 		String name = settings.getString("name", "notset");
 		String email = settings.getString("email", "notset");
+		String realEmail = settings.getString("realEmail", "notset");
 		String pw = settings.getString("pw", "notset");
 		String token = settings.getString("token", "notset");
+		String lastUpdate = settings.getString("lastUpdate", "notset");
 		String date = settings.getString("expirationDate", "1999-12-12 00:00:00");
 		boolean loggedOut = settings.getBoolean("loggedOut", true);
 //		date = "1999-12-12 00:00:01";
@@ -134,17 +138,19 @@ public class BusPhoneClient extends Application {
 			
 			setName(name);
 			setEmail(email);
+			setRealEmail(realEmail);
 			setUser_id(userid);
 			setPw(pw);
 			setExpirationDate(sharedDate); 
 			setToken(token);
 			setLoggedOut(loggedOut);
+			this.lastUpdate = lastUpdate;
 			return true;
 		} catch (ParseException e) {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Saves the shared preferences
 	 */
@@ -158,6 +164,7 @@ public class BusPhoneClient extends Application {
 		editor.putString("userid", user_id);
 		editor.putString("name", name);
 		editor.putString("email", email);
+		editor.putString("realEmail", realEmail);
 		editor.putString("pw", pw);
 		editor.putString("token", token);
 		editor.putBoolean("loggedOut", loggedOut);
@@ -184,4 +191,25 @@ public class BusPhoneClient extends Application {
 		defaultPrefsPut.commit();
 	}
 
+	public String getRealEmail() {
+		return realEmail;
+	}
+	
+	public void setRealEmail(String realEmail) {
+		this.realEmail = realEmail;
+	}
+
+	public void saveLastUpdate() {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+		SharedPreferences.Editor editor = settings.edit();
+		SimpleDateFormat dFormat = new SimpleDateFormat(getString(R.string.time_format), Locale.getDefault());
+		String lastUpdate = dFormat.format(new Date()).toString();
+		editor.putString("lastUpdate", lastUpdate);
+		editor.commit();
+		this.lastUpdate = lastUpdate;
+	}
+	
+	public String getLastUpdate() {
+		return lastUpdate;
+	}
 }
