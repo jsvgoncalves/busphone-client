@@ -83,6 +83,7 @@
 	<string name="profile_lastUpdate">Último update</string>
 	<string name="profile_lastLogin">Último login</string>
 	<string name="profile_tokenExpires">Login expira</string>
+	<string name="profile_userid">ID utilizador</string>
 	
 
 </resources>

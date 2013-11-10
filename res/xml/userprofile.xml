@@ -24,11 +24,15 @@
 	<PreferenceCategory 
 		android:title="@string/profile_advanced">
 		<EditTextPreference
-		    android:key="pref_profile_lastUpdate"
+			android:key="pref_profile_userid"
+			android:title="@string/profile_userid"
+			android:enabled="false" />
+		<EditTextPreference
+			android:key="pref_profile_lastUpdate"
 			android:title="@string/profile_lastUpdate"
 			android:enabled="false" />
 		<EditTextPreference
-		    android:key="pref_profile_expires"
+			android:key="pref_profile_expires"
 			android:title="@string/profile_tokenExpires"
 			android:enabled="false" />
 	</PreferenceCategory>

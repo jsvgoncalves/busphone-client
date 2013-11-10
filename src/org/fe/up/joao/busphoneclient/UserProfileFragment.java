@@ -29,5 +29,8 @@ public class UserProfileFragment extends PreferenceFragment {
 		profile_expires.setSummary(dFormat.format(bus.getExpirationDate()).toString());
 		EditTextPreference profile_last_update = (EditTextPreference) findPreference("pref_profile_lastUpdate");
 		profile_last_update.setSummary(bus.getLastUpdate());
+		EditTextPreference profile_userid = (EditTextPreference) findPreference("pref_profile_userid");
+		profile_userid.setSummary(bus.getUserID());
+		
 	}
 }
