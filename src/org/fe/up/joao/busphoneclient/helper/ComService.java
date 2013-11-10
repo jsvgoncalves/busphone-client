@@ -49,7 +49,7 @@ public class ComService extends AsyncTask<String, String, String> {
 	@Override
 	protected void onPostExecute (String result){
 //		System.out.println(result);
-		Log.e("mylog", "result " + result);
+//		Log.e("mylog", "result " + result);
 //		JSONObject json = JSONHelper.string2JSON(result);
 //		String status = JSONHelper.getValue(json, "status");
 		if (showProgress) {

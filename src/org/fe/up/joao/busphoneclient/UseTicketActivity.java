@@ -41,21 +41,21 @@ public class UseTicketActivity  extends Activity {
 			ticket_type = extras.getString("ticket_type");
 		}
 		
-		String qrData = ((BusPhoneClient) getApplicationContext()).getUserID()  + ";";
-		// Log.v("mylog", "Ticket type is " + ticket_type);
+		String qrData = ((BusPhoneClient) getApplication()).getUserID()  + ";";
+		Log.e("mylog", "Ticket type is " + ticket_type);
 		
 		if(ticket_type.equals("T1")) {
-			Button bt1 = (Button) findViewById(R.id.t1button);
+			Button bt1 = (Button) findViewById(R.id.t1button_use);
 			bt1.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt1.setEnabled(false);
 			qrData += User.ticketsT1.get(0).uuid;
 		} else if(ticket_type.equals("T2")) {
-			Button bt2 = (Button) findViewById(R.id.t2button);
+			Button bt2 = (Button) findViewById(R.id.t2button_use);
 			bt2.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt2.setEnabled(false);
 			qrData += User.ticketsT2.get(0).uuid;
 		} else if(ticket_type.equals("T3")) {
-			Button bt3 = (Button) findViewById(R.id.t3button);
+			Button bt3 = (Button) findViewById(R.id.t3button_use);
 			bt3.getBackground().setColorFilter(0xFF33B5E5, PorterDuff.Mode.MULTIPLY);
 			bt3.setEnabled(false);
 			qrData += User.ticketsT3.get(0).uuid;
@@ -63,15 +63,15 @@ public class UseTicketActivity  extends Activity {
 		
 		// Check all tickets size to disable empty ones
 		if(User.ticketsT1.size() < 1) {
-			Button bt1 = (Button) findViewById(R.id.t1button);
+			Button bt1 = (Button) findViewById(R.id.t1button_use);
 			bt1.setEnabled(false);
 		}
 		if(User.ticketsT2.size() < 1) {
-			Button bt2 = (Button) findViewById(R.id.t2button);
+			Button bt2 = (Button) findViewById(R.id.t2button_use);
 			bt2.setEnabled(false);
 		}
 		if(User.ticketsT3.size() < 1) {
-			Button bt3 = (Button) findViewById(R.id.t3button);
+			Button bt3 = (Button) findViewById(R.id.t3button_use);
 			bt3.setEnabled(false);
 		}
 

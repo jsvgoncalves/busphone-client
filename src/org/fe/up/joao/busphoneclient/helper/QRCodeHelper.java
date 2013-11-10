@@ -21,19 +21,14 @@ public class QRCodeHelper {
 	
 	
 	public static void updateQRCode(String qrMessage, ImageView imageView){
-
-		if (!User.ticketsHistory.isEmpty()) {
-			
-			int qrCodeDimention = 500;
-			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrMessage, null,
-					Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-
-			try {
-				Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-				imageView.setImageBitmap(bitmap);
-			} catch (WriterException e) {
-				e.printStackTrace();
-			}
+		int qrCodeDimention = 500;
+		QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrMessage, null,
+				Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
+		try {
+			Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
+			imageView.setImageBitmap(bitmap);
+		} catch (WriterException e) {
+			e.printStackTrace();
 		}
 	}
 

@@ -265,10 +265,10 @@ public class HomeActivity extends Activity {
 			buttonT3.setEnabled(true);
 		}
 		
-		// Updates QRCode and last ticket info
+		// If there is no ticket history then don't show QR code
 		if (User.ticketsHistory.isEmpty()) {
 			((LinearLayout) findViewById(R.id.last_used_ticket_layout)).setVisibility(View.GONE);
-		} else {
+		} else {// Updates QRCode and last ticket info
 			((LinearLayout) findViewById(R.id.last_used_ticket_layout)).setVisibility(View.VISIBLE);
 			String qrData = User.getID() + ";" + User.ticketsHistory.get(0).uuid;
 			ImageView imageView = (ImageView) findViewById(R.id.qrCode);
@@ -291,7 +291,7 @@ public class HomeActivity extends Activity {
 	@Override
 	public void onStop() {
 		super.onStop();
-		Log.v("mylog", "stopping home");
+//		Log.v("mylog", "stopping home");
 	}
 	
 	@Override

@@ -19,7 +19,7 @@
         android:paddingTop="10dp" >
 
         <Button
-            android:id="@+id/t1button"
+            android:id="@+id/t1button_use"
             style="android:buttonBarStyle"
             android:layout_width="85dp"
             android:layout_height="85dp"
@@ -27,7 +27,7 @@
             android:onClick="t1Clicked" />
 
         <Button
-            android:id="@+id/t2button"
+            android:id="@+id/t2button_use"
             style="android:buttonBarStyle"
             android:layout_width="85dp"
             android:layout_height="85dp"
@@ -35,7 +35,7 @@
             android:onClick="t2Clicked" />
 
         <Button
-            android:id="@+id/t3button"
+            android:id="@+id/t3button_use"
             style="android:buttonBarStyle"
             android:layout_width="85dp"
             android:layout_height="85dp"
