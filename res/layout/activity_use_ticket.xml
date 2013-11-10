@@ -24,7 +24,7 @@
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:background="@drawable/button_ticket1"
-            android:onClick="buttonClicked" />
+            android:onClick="t1Clicked" />
 
         <Button
             android:id="@+id/t2button"
@@ -32,7 +32,7 @@
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:background="@drawable/button_ticket2"
-            android:onClick="buttonClicked" />
+            android:onClick="t2Clicked" />
 
         <Button
             android:id="@+id/t3button"
@@ -40,7 +40,7 @@
             android:layout_width="85dp"
             android:layout_height="85dp"
             android:background="@drawable/button_ticket3"
-            android:onClick="buttonClicked" />
+            android:onClick="t3Clicked" />
     </LinearLayout>
 
     <ImageView

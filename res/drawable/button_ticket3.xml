@@ -4,7 +4,7 @@
           android:state_pressed="true" />
     <item android:drawable="@drawable/ticket3"
           android:state_focused="true" />
-    <item android:drawable="@drawable/ticket1_disabled"
+    <item android:drawable="@drawable/ticket3_disabled"
         android:state_enabled="false"/>
     <item android:drawable="@drawable/ticket3" />
 </selector>

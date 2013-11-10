@@ -236,47 +236,11 @@ public class HomeActivity extends Activity {
 			startActivity(intent);
 		}
 	}
-	
-	
-	
-//	protected void updateQRCode(){
-//		// ImageView to display the QR code in.  This should be defined in 
-//		// your Activity's XML layout file
-//		ImageView imageView = (ImageView) findViewById(R.id.qrCode);
-//	
-//		if (!User.ticketsHistory.isEmpty()) {
-//			String qrData = User.ticketsHistory.get(0).uuid;
-//			int qrCodeDimention = 500;
-//			System.out.println("Ticket history is empty.");
-//			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder(qrData, null,
-//			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-//		
-//			try {
-//			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-//			    imageView.setImageBitmap(bitmap);
-//			} catch (WriterException e) {
-//			    e.printStackTrace();
-//			}
-//		} else {
-//			int qrCodeDimention = 500;
-//			QRCodeEncoder qrCodeEncoder = new QRCodeEncoder("bananas", null,
-//			        Contents.Type.TEXT, BarcodeFormat.QR_CODE.toString(), qrCodeDimention);
-//		
-//			try {
-//			    Bitmap bitmap = qrCodeEncoder.encodeAsBitmap();
-//			    imageView.setImageBitmap(bitmap);
-//			} catch (WriterException e) {
-//			    e.printStackTrace();
-//			}
-//		}
-//	}
-	
-	
-//	public void updateUsernameDisplay() {
-//		TextView userName = (TextView) findViewById(R.id.using_ticket);
-//		userName.setText(String.format( getString(R.string.greeting), bus.getName()));
-//	}
-	
+
+	/**
+	 * Updates the number of tickets available in each ticket button.
+	 * The data is fetched from the User.tickets and not from the API.
+	 */
 	public void updateTicketsDisplay() {
 		Button buttonT1 = (Button) findViewById(R.id.t1button);
 		Button buttonT2 = (Button) findViewById(R.id.t2button);
