@@ -136,7 +136,7 @@ public class BuyTicketsActivity  extends Activity {
 	public void buyTickets(View v){
 		// get 'users/:id/buy/:nt1/:nt2/:nt3/t/:token'
 		String url = String.format("users/%s/buy/%d/%d/%d/t/%s", User.getID(), t1_amount, t2_amount, t3_amount, User.getToken());
-		new ComService(url, this, "returnFromBuyingTicketsHanlder", true);
+		new ComService(url, this, "ticketsBought", true);
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class BuyTicketsActivity  extends Activity {
 	/**
 	 * The returnFromBuyingTicketsHanlder hanlder
 	 */
-	public void returnFromBuyingTicketsHanlder(String result) {
+	public void ticketsBought(String result) {
 		Log.v("MyLog", "Tickets buy result: " + result);
 		// Parse the tickets
 //		JSONObject json = JSONHelper.string2JSON(result);

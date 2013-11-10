@@ -44,7 +44,8 @@ import android.widget.Toast;
 public class HomeActivity extends Activity {
 	
 	BusPhoneClient bus;
-
+	private boolean buttonPressed = false;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 //		Log.v("mylog", "network: " + ComHelper.isOnline(this)); // TODO check if the user has net.
@@ -174,21 +175,30 @@ public class HomeActivity extends Activity {
 	 * Handler for ticket button T1 
 	 */
 	public void buttonClickedT1(View view) {
-		startUseTicket(User.ticketsT1, "T1");
+		if(!buttonPressed) {
+			buttonPressed = true;
+			startUseTicket(User.ticketsT1, "T1");
+		}
 	}
 	
 	/**
 	 * Handler for ticket button T2
 	 */ 
 	public void buttonClickedT2(View view) {
-		startUseTicket(User.ticketsT2, "T2");
+		if(!buttonPressed) {
+			buttonPressed = true;
+			startUseTicket(User.ticketsT2, "T2");
+		}
 	}
 	
 	/**
 	 * Handler for ticket button T3
 	 */
 	public void buttonClickedT3(View view) {
-		startUseTicket(User.ticketsT3, "T3");
+		if(!buttonPressed) {
+			buttonPressed = true;
+			startUseTicket(User.ticketsT3, "T3");
+		}
 	}
 
 	/**
@@ -209,16 +219,22 @@ public class HomeActivity extends Activity {
 	 * Handler for the buy tickets button
 	 */
 	public void buyTicketsAction(View v) {
-		Intent intent = new Intent(this, BuyTicketsActivity.class);
-		startActivity(intent);
+		if(!buttonPressed) {
+			buttonPressed = true;
+			Intent intent = new Intent(this, BuyTicketsActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	/**
 	 * Handler for the history button
 	 */
 	public void historyAction(View v) {
-		Intent intent = new Intent(this, HistoryActivity.class);
-		startActivity(intent);
+		if(!buttonPressed) {
+			buttonPressed = true;
+			Intent intent = new Intent(this, HistoryActivity.class);
+			startActivity(intent);
+		}
 	}
 	
 	
@@ -328,5 +344,6 @@ public class HomeActivity extends Activity {
 		super.onResume();
 		Log.v("mylog", "resuming");
 		updateTicketsDisplay();
+		buttonPressed = false;
 	}
 }

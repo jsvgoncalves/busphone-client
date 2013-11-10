@@ -8,17 +8,17 @@ public class SQLBusTickets extends SQLiteOpenHelper {
 	
 	private static final int DATABASE_VERSION = 2;
 	private static final String DATABASE_NAME = "busphone";
-    public static final String TABLE_TICKETS = "tickets";
+	public static final String TABLE_TICKETS = "tickets";
 	public static final String FIELD_TICKET_ID = "id";
 	public static final String FIELD_TICKET_UUID = "uuid";
 	public static final String FIELD_TICKET_TYPE = "ticket_type";
-    private static final String TICKETS_TABLE_CREATE =
-                "CREATE TABLE " + TABLE_TICKETS + " (" +
-                FIELD_TICKET_ID + " TEXT, " +
-                FIELD_TICKET_UUID + " TEXT, " +
-                FIELD_TICKET_TYPE + " TEXT);";
-    
-    SQLiteDatabase db;
+	private static final String TICKETS_TABLE_CREATE =
+			"CREATE TABLE " + TABLE_TICKETS + " (" +
+			FIELD_TICKET_ID + " TEXT, " +
+			FIELD_TICKET_UUID + " TEXT, " +
+			FIELD_TICKET_TYPE + " TEXT);";
+
+	SQLiteDatabase db;
 	
 	
 	public SQLBusTickets(Context context) {
@@ -34,7 +34,7 @@ public class SQLBusTickets extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_TICKETS);
-        onCreate(db);
+		onCreate(db);
 	}
 
 }
