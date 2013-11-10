@@ -152,5 +152,13 @@
             android:onClick="buyTickets"
             android:text="@string/buy" />
     </LinearLayout>
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:paddingTop="50dp"
+        android:text="@string/promotion"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

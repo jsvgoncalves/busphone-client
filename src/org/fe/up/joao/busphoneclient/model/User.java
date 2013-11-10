@@ -1,6 +1,7 @@
 package org.fe.up.joao.busphoneclient.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.fe.up.joao.busphoneclient.helper.JSONHelper;
 import org.fe.up.joao.busphoneclient.helper.TicketsDataSource;
@@ -206,19 +207,26 @@ public class User {
 	public static boolean validateTicket(Context context, String ticket_type) {
 		TicketsDataSource db = new TicketsDataSource(context);
 		
+		UsedTicket t = null;
 		if(ticket_type.equals("T1")) {
+			Ticket oldT = User.ticketsT1.get(0);
+			t = new UsedTicket(oldT, new Date());
 			db.deleteTicket(ticketsT1.get(0));
 			ticketsT1.remove(0);
 		} else if(ticket_type.equals("T2")) {
+			Ticket oldT = User.ticketsT2.get(0);
+			t = new UsedTicket(oldT, new Date());
 			db.deleteTicket(ticketsT2.get(0));
 			ticketsT2.remove(0);
 		} else if(ticket_type.equals("T3")) {
+			Ticket oldT = User.ticketsT3.get(0);
+			t = new UsedTicket(oldT, new Date());
 			db.deleteTicket(ticketsT3.get(0));
 			ticketsT3.remove(0);
 		} else {
 			return false;
 		}
-		
+		User.ticketsHistory.add(0, t);
 		return true;
 	}
 }

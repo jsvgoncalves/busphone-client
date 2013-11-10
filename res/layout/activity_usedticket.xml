@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="0dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="0dp"
+    tools:context="org.fe.up.joao.busphoneclient.HomeActivity" >
+
+    <TextView 
+        android:id="@+id/used_ticket_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <ImageView
+        android:id="@+id/qrCode_usedticket"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:contentDescription="@string/qrcode_thumb"
+        android:gravity="center"
+        android:padding="0dp" />
+</LinearLayout>

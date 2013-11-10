@@ -88,6 +88,14 @@
 				android:name="android.support.PARENT_ACTIVITY"
 				android:value="org.fe.up.joao.busphoneclient.HomeActivity" />
 		</activity>
+		<activity
+			android:name="org.fe.up.joao.busphoneclient.UsedTicketQRActivity"
+			android:label="@string/profile"
+			android:configChanges="orientation"
+			android:screenOrientation="portrait"
+			 >
+			
+		</activity>
 	</application>
 
 </manifest>
